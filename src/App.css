@@ -1,6 +1,11 @@
-.App {
+@import '~antd/dist/antd.css';
+/* @import '~antd/dist/antd.dark.css'; */
+/* @import '~antd/dist/antd.compact.css'; */
+/* .App {
   text-align: center;
-}
+} */
+
+
 
 .App-logo {
   height: 40vmin;
@@ -12,6 +17,8 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+
+@primary-color: #1890ff;
 
 .App-header {
   background-color: #282c34;
@@ -25,7 +32,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #7700b4;
 }
 
 @keyframes App-logo-spin {
@@ -35,4 +42,28 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+
+#components-layout-demo-custom-trigger .trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+#components-layout-demo-custom-trigger .trigger:hover {
+  color: #7700b4;
+}
+
+#components-layout-demo-custom-trigger .logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.3);
+  margin: 16px;
+}
+
+.site-layout .site-layout-background {
+  background: #fff;
 }

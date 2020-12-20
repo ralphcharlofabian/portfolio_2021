@@ -35,12 +35,12 @@ const PerformaceGraph = () => {
     difficultyLevelAve:0,
   })
 
-  taskList.sort(function(a,b){
+  let sortedTaskList = taskList.sort(function(a,b){
     return new Date(b.lastSaveDate) - new Date(a.lastSaveDate);
   });
 
  // Main Computation from task history
-  taskList.forEach(x => {
+ sortedTaskList.forEach(x => {
 
     function addition(arr) {
        if (Object.prototype.toString.call(arr) === '[object Array]') {
@@ -87,7 +87,9 @@ const PerformaceGraph = () => {
     let difficultyLevelOccurrences = tempDifficultyLevelArr.reduce((prev, curr) => (prev[curr] = ++prev[curr] || 1, prev), {});
 
     let tempIsTaskDoneArr = x.taskHistory.map(x => {return(x.done)});
+    console.log(tempIsTaskDoneArr,'tempIsTaskDoneArrtempIsTaskDoneArr')
     let tempIsTaskDoneMostOcc = mostOccurence(tempIsTaskDoneArr);
+    console.log(tempIsTaskDoneMostOcc,'tempIsTaskDoneMostOcc')
     let IsTaskDoneOcc = tempIsTaskDoneArr.reduce((prev, curr) => (prev[curr] = ++prev[curr] || 1, prev), {});
 
     
@@ -109,7 +111,7 @@ const PerformaceGraph = () => {
       noOfTask:x.taskHistory? x.taskHistory.length + 1 : 0,
       lastSaveDate: x.lastSaveDate,
       taskDoneCount: IsTaskDoneOcc.true ? IsTaskDoneOcc.true : 0,
-      taskNotDoneCount: x.taskHistory? -Math.abs((x.taskHistory.length - IsTaskDoneOcc.true) + 1) : 0,
+      taskNotDoneCount: x.taskHistory? -Math.abs(IsTaskDoneOcc.false) : 0,
     }
 
     taskLiskData.unshift(tempData);

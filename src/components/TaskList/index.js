@@ -510,7 +510,7 @@ const TaskList = () => {
       columns['doneId'].items.forEach(x=>{
         x.done = true;
         x.taskPercentage = 100;
-        x.performanceRate = performanceRate(x.difficultyLevel, x.priorityLevel, true  )}
+        x.performanceRate = performanceRate(x.difficultyLevel, x.priorityLevel, true)}
       )
 
       columnHistory.taskHistory.push(...columns['doneId'].items)

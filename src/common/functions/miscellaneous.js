@@ -1,9 +1,9 @@
-    export function performanceRate(dificultyLevel, priorityLevel, done) {
+    export function performanceRate(difficultyLevel, priorityLevel, done) {
       let rate = 0;
 
-      if (dificultyLevel === 'medium') {
+      if (difficultyLevel === 'medium') {
         rate = rate + 1;
-      } else if (dificultyLevel === 'hard') {
+      } else if (difficultyLevel === 'hard') {
         rate = rate + 2;
       };
 

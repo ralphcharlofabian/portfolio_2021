@@ -32,15 +32,15 @@ import {
   EditOutlined,
   RestOutlined,
   FireOutlined,
-  EyeOutlined,
+  SaveOutlined,
   FileAddOutlined,
 } from '@ant-design/icons';
 
 
 //constants
 import Sidebar from '../../common/components/Sidebar';
-import {updateTaskList} from '../../appRedux/actions'
-import AddEditTaskModal from './AddEditTaskModal';
+import {updateTaskList, updateTaskListHistory} from '../../appRedux/actions'
+import {columnsEmpty} from '../../common/constants/miscellaneous'
 
 
 //functions
@@ -55,17 +55,19 @@ const TaskList = () => {
 
   const taskListReducer = useSelector(state => state.taskListReducer); 
   const userListReducer = useSelector(state => state.userListReducer); 
+  const taskListHistoryReducer = useSelector(state => state.taskListHistoryReducer); 
 
+  
   const dispatch = useDispatch();
-
+  
   const {userList, availableCandidate} = userListReducer;
   const {columnsFromBackend} = taskListReducer;
-  console.log(columnsFromBackend,'columnsFromBackend')
+  const {taskHistoryList} = taskListHistoryReducer;
 
   const [collapsed, setCollapsed] = useState(false);
   const [personelList, setUserList] = useState(userList? userList : []);
   const [selectedPersonel, setSelectedPersonel] = useState()
-  const [columns, setColumns] = useState(columnsFromBackend ? columnsFromBackend : []);
+  const [columns, setColumns] = useState(columnsFromBackend ? columnsFromBackend : columnsEmpty);
   const [showInfoDrawer, setShowInfoDrawer] = useState(false);
   const [selectedTaskInfo, setSelectedTaskInfo] = useState();
   const [showInfoModal, setShowInfoModal] = useState(false);
@@ -85,11 +87,14 @@ const TaskList = () => {
     dateCreated: moment().subtract(15,'d'),
     taskPercentage: 0,
     priorityLevel: '',
-    dificultyLevel: '',
+    difficultyLevel: '',
     taskNote: ``,
     done:false,
     performanceRate:-1
   });
+  const [taskHistory, SetTaskHistory] = useState();
+
+
 
   const selectPersonel = (personel) => {
     console.log(tempEditTaskInfo,'tempEditTaskInfo');
@@ -108,7 +113,7 @@ const TaskList = () => {
       setTempEditTaskInfo({
         ...tempEditTaskInfo,
         priorityLevel:level,
-        performanceRate: performanceRate(tempEditTaskInfo.dificultyLevel, level, tempEditTaskInfo.done  )
+        performanceRate: performanceRate(tempEditTaskInfo.difficultyLevel, level, tempEditTaskInfo.done  )
       })
       console.log(tempEditTaskInfo,'tempEditTaskInfo uyyyy');
 
@@ -117,7 +122,7 @@ const TaskList = () => {
   const onClicksetDificulty = (level) => {
       setTempEditTaskInfo({
         ...tempEditTaskInfo,
-        dificultyLevel:level,
+        difficultyLevel:level,
         performanceRate: performanceRate(level,tempEditTaskInfo.priorityLevel, tempEditTaskInfo.done  )
       })
 
@@ -189,7 +194,7 @@ const TaskList = () => {
       dateCreated: moment().subtract(15,'d'),
       taskPercentage: 0,
       priorityLevel: '',
-      dificultyLevel: '',
+      difficultyLevel: '',
       taskNote: ``,
       done:false,
       performanceRate:-1
@@ -212,7 +217,7 @@ const TaskList = () => {
         dateCreated: moment().subtract(15,'d'),
         taskPercentage: 0,
         priorityLevel: '',
-        dificultyLevel: '',
+        difficultyLevel: '',
         taskNote: ``,
         done:false,
         performanceRate:-1
@@ -246,7 +251,7 @@ const TaskList = () => {
         dateCreated: moment().subtract(15,'d'),
         taskPercentage: 0,
         priorityLevel: '',
-        dificultyLevel: '',
+        difficultyLevel: '',
         taskNote: ``,
         done:false,
         performanceRate:-1
@@ -323,7 +328,7 @@ const TaskList = () => {
         dateCreated: moment().subtract(15,'d'),
         taskPercentage: 0,
         priorityLevel: '',
-        dificultyLevel: '',
+        difficultyLevel: '',
         taskNote: ``,
         done:false,
         performanceRate:-1
@@ -412,7 +417,7 @@ const TaskList = () => {
         dateCreated: moment().subtract(15,'d'),
         taskPercentage: 0,
         priorityLevel: '',
-        dificultyLevel: '',
+        difficultyLevel: '',
         taskNote: ``,
         done:false,
         performanceRate:-1
@@ -445,6 +450,7 @@ const TaskList = () => {
       const destColumn = columns[destination.droppableId];
       const sourceItems = [...sourceColumn.items];
       const destItems = [...destColumn.items];
+      console.log(destItems,'destItems')
       const [removed] = sourceItems.splice(source.index, 1);
       destItems.splice(destination.index, 0, removed);
 
@@ -481,6 +487,99 @@ const TaskList = () => {
     }
   }
 
+  const onClickEndSprint = () => {
+
+    let columnHistory = {
+      year:moment().format('YYYY'),
+      month:moment().format('MMMM'),
+      sprintNumber: parseInt(moment().format('D')) > 15 ? 2: 1,
+      lastSaveDate: moment(),
+      taskHistory:[],
+    }
+
+    if(columns['backlogId'].items || columns['inProgressId'].items ||
+    columns['revisionId'].items || columns['doneId'].items) {
+
+      columnHistory.taskHistory.push(...columns['backlogId'].items)
+      columnHistory.taskHistory.push(...columns['inProgressId'].items)
+      columnHistory.taskHistory.push(...columns['revisionId'].items)
+
+
+      console.log(columns['doneId'].items,`columns['doneId'].items`)
+
+      columns['doneId'].items.forEach(x=>{
+        x.done = true;
+        x.taskPercentage = 100;
+        x.performanceRate = performanceRate(x.difficultyLevel, x.priorityLevel, true  )}
+      )
+
+      columnHistory.taskHistory.push(...columns['doneId'].items)
+
+
+
+      if (taskHistoryList.filter(x=> x.year === moment().format('YYYY') && x.month === moment().format('MMMM')).length === 0) {
+        taskHistoryList.unshift(columnHistory)
+        setColumns(columnsEmpty);
+        dispatch(updateTaskListHistory(taskHistoryList));
+        openNotificationSaveTask('success')
+
+        // if( parseInt(moment().format('D')) > 15 === true) {
+        //   taskHistoryList.unshift(columnHistory)
+        //   setColumns(columnsEmpty);
+        //   dispatch(updateTaskListHistory(taskHistoryList));
+        //   openNotificationSaveTask('success');
+        // }
+      } else  if (parseInt(moment().format('D')) > 15) {
+        let tempList2 = taskHistoryList.filter(x=> x.year === moment().format('YYYY') && x.month === moment().format('MMMM') && x.sprintNumber === 2);
+   
+        console.log(tempList2,'tempList2')
+
+        if (tempList2 && tempList2.length > 0 && tempList2[0].sprintNumber === 2){
+          tempList2[0].taskHistory.unshift(...columnHistory.taskHistory);
+          openNotificationSaveTask('success')
+        } else {
+          taskHistoryList.splice(1, 0, columnHistory);
+          dispatch(updateTaskListHistory(taskHistoryList));
+          openNotificationSaveTask('success')
+        }
+
+        setColumns(columnsEmpty);
+
+        
+        // console.log(tempList,'tempList last')
+
+      } else if (parseInt(moment().format('D')) <= 15) {
+        let tempList1 = taskHistoryList.filter(x=> x.year === moment().format('YYYY') && x.month === moment().format('MMMM') && x.sprintNumber === 1);
+
+         if (tempList1 && tempList1.length > 0 && tempList1[0].sprintNumber === 1){
+          tempList1[0].taskHistory.unshift(...columnHistory.taskHistory);
+          openNotificationSaveTask('success')
+        } else {
+          taskHistoryList.unshift(columnHistory);
+          dispatch(updateTaskListHistory(taskHistoryList));
+          openNotificationSaveTask('success')
+        }
+
+        setColumns(columnsEmpty);
+      }
+     
+
+
+
+
+      // taskHistoryList.unshift(columnHistory)
+      // setColumns(columnsEmpty);
+      // dispatch(updateTaskListHistory(taskHistoryList));
+      // openNotificationSaveTask('success');
+    }
+
+  }
+
+  const openNotificationSaveTask = type => {
+    notification[type]({
+      message: 'Task Successfully Saved to Task History'
+    });
+  };
 
 
   const menu = (
@@ -574,10 +673,10 @@ const TaskList = () => {
                                             
                                               </Col>
                                               <Col span={6} style={{paddingLeft:5}}>
-                                                <Tooltip placement="top" title={item.dificultyLevel} >
-                                                  {item ? (item.dificultyLevel === 'easy' ? <RestOutlined style={{ fontSize: 35, color: '#036636' }}/> : '') : ''}
-                                                  {item ? (item.dificultyLevel === 'medium' ? <RestOutlined style={{ fontSize: 35, color: '#2c538f' }}/> : '') : ''}
-                                                  {item ? (item.dificultyLevel === 'hard' ? <RestOutlined style={{ fontSize: 35, color: '#c456ec' }}/> : '') : ''}
+                                                <Tooltip placement="top" title={item.difficultyLevel} >
+                                                  {item ? (item.difficultyLevel === 'easy' ? <RestOutlined style={{ fontSize: 35, color: '#036636' }}/> : '') : ''}
+                                                  {item ? (item.difficultyLevel === 'medium' ? <RestOutlined style={{ fontSize: 35, color: '#2c538f' }}/> : '') : ''}
+                                                  {item ? (item.difficultyLevel === 'hard' ? <RestOutlined style={{ fontSize: 35, color: '#c456ec' }}/> : '') : ''}
                                                 </Tooltip>
                                                 <Tooltip placement="top" title={item.priorityLevel} >
                                                   
@@ -603,7 +702,17 @@ const TaskList = () => {
                     )
                   })}
                   <Tooltip placement="top" title={'Create Task'}> 
-                    <Button type="primary" shape="circle" icon={<FileAddOutlined style={{ fontSize: 35 }}/>} style={{position:'absolute', bottom:20, right: 20, width:60, height:60}} onClick={onClickCreateTask}/>
+                    <Button type="primary" shape="circle" icon={<FileAddOutlined style={{ fontSize: 25 }}/>} style={{position:'absolute', bottom:90, right: 20, width:50, height:50}} onClick={onClickCreateTask}/>
+                  </Tooltip>
+                  <Tooltip placement="top" title={'End Sprint and Save'}> 
+                    <Button 
+                      type="primary" 
+                      shape="circle" 
+                      icon={<SaveOutlined style={{ fontSize: 35 }}/>} 
+                      style={{position:'absolute', bottom:15, right: 15, width:60, height:60}} 
+                      disabled= {!(columns['backlogId'].items || columns['inProgressId'].items ||
+                      columns['revisionId'].items || columns['doneId'].items)}
+                      onClick={onClickEndSprint}/>
                   </Tooltip>
                 </DragDropContext>
              </div>
@@ -648,9 +757,9 @@ const TaskList = () => {
                   {selectedTaskInfo ? (selectedTaskInfo.priorityLevel === 'normal' ? <div style={{paddingBottom:5}}>Priority Level: <FireOutlined style={{ fontSize: 30, color: '#ff975a' }}/> <span style={{color:'#ff975a'}}> Normal</span></div> : '') : ''}
                   {selectedTaskInfo ? (selectedTaskInfo.priorityLevel === 'least' ? <div style={{paddingBottom:5}}>Priority Level: <FireOutlined style={{ fontSize: 30, color: '#ffdf9e' }}/> <span style={{color:'#ffdf9e'}}> Least</span></div> : '') : ''}
 
-                  {selectedTaskInfo ? (selectedTaskInfo.dificultyLevel === 'easy' ? <div style={{paddingBottom:10}}>Dificulty Level: <RestOutlined style={{ fontSize: 30, color: '#036636' }}/> <span style={{color:'#036636'}}> easy</span></div> : '') : ''}
-                  {selectedTaskInfo ? (selectedTaskInfo.dificultyLevel === 'medium' ? <div style={{paddingBottom:5}}>Dificulty Level: <RestOutlined style={{ fontSize: 30, color: '#2c538f' }}/> <span style={{color:'#2c538f'}}> Medium</span></div> : '') : ''}
-                  {selectedTaskInfo ? (selectedTaskInfo.dificultyLevel === 'hard' ? <div style={{paddingBottom:5}}>Dificulty Level: <RestOutlined style={{ fontSize: 30, color: '#c456ec' }}/> <span style={{color:'#c456ec'}}> Hard</span></div> : '') : ''}
+                  {selectedTaskInfo ? (selectedTaskInfo.difficultyLevel === 'easy' ? <div style={{paddingBottom:10}}>Dificulty Level: <RestOutlined style={{ fontSize: 30, color: '#036636' }}/> <span style={{color:'#036636'}}> easy</span></div> : '') : ''}
+                  {selectedTaskInfo ? (selectedTaskInfo.difficultyLevel === 'medium' ? <div style={{paddingBottom:5}}>Dificulty Level: <RestOutlined style={{ fontSize: 30, color: '#2c538f' }}/> <span style={{color:'#2c538f'}}> Medium</span></div> : '') : ''}
+                  {selectedTaskInfo ? (selectedTaskInfo.difficultyLevel === 'hard' ? <div style={{paddingBottom:5}}>Dificulty Level: <RestOutlined style={{ fontSize: 30, color: '#c456ec' }}/> <span style={{color:'#c456ec'}}> Hard</span></div> : '') : ''}
 
                   
                   <div>{`Date Created:   ${selectedTaskInfo ? moment(selectedTaskInfo.dateCreated).format('MMM/DD/YYYY') : 'Date Created: None'}`}</div>
@@ -788,30 +897,30 @@ const TaskList = () => {
               <Col span={3} onClick={()=>onClicksetDificulty('easy')}>
                 <Button type='link'>
                   <Row justifyContent='center' style={{marginBottom:0}}>
-                    <RestOutlined style={{ fontSize: 35, color: tempEditTaskInfo.dificultyLevel === 'easy'? '#036636' :'lightgray',marginBottom:0 }}/>
+                    <RestOutlined style={{ fontSize: 35, color: tempEditTaskInfo.difficultyLevel === 'easy'? '#036636' :'lightgray',marginBottom:0 }}/>
                   </Row>
                   <Row justifyContent='center' style={{marginBottom:0}}>
-                    <span style={{color: tempEditTaskInfo.dificultyLevel === 'easy'? '#036636' :'lightgray'}}> Easy</span>
+                    <span style={{color: tempEditTaskInfo.difficultyLevel === 'easy'? '#036636' :'lightgray'}}> Easy</span>
                   </Row>
                 </Button>
               </Col>
               <Col span={3} onClick={()=>onClicksetDificulty('medium')}>
                 <Button type='link'>
                   <Row justifyContent='center' style={{marginBottom:0}}>
-                    <RestOutlined style={{ fontSize: 35, color: tempEditTaskInfo.dificultyLevel === 'medium'? '#2c538f' :'lightgray' ,marginBottom:0 }}/>
+                    <RestOutlined style={{ fontSize: 35, color: tempEditTaskInfo.difficultyLevel === 'medium'? '#2c538f' :'lightgray' ,marginBottom:0 }}/>
                   </Row>
                   <Row justifyContent='center' style={{marginBottom:0}}>
-                    <span style={{color: tempEditTaskInfo.dificultyLevel === 'medium'? '#2c538f' :'lightgray'}}> Medium</span>
+                    <span style={{color: tempEditTaskInfo.difficultyLevel === 'medium'? '#2c538f' :'lightgray'}}> Medium</span>
                   </Row>
                 </Button>
               </Col>
               <Col span={3} onClick={()=>onClicksetDificulty('hard')}>
                 <Button type='link'>
                   <Row justifyContent='center' style={{marginBottom:0}}>
-                    <RestOutlined style={{ fontSize: 35, color: tempEditTaskInfo.dificultyLevel === 'hard'? '#c456ec' :'lightgray',marginBottom:0 }}/>
+                    <RestOutlined style={{ fontSize: 35, color: tempEditTaskInfo.difficultyLevel === 'hard'? '#c456ec' :'lightgray',marginBottom:0 }}/>
                   </Row>
                   <Row justifyContent='center' style={{marginBottom:0}}>
-                    <span style={{color:tempEditTaskInfo.dificultyLevel === 'hard'? '#c456ec' :'lightgray'}}> Hard</span>
+                    <span style={{color:tempEditTaskInfo.difficultyLevel === 'hard'? '#c456ec' :'lightgray'}}> Hard</span>
                   </Row>
                 </Button>
                 

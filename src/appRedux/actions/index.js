@@ -15,3 +15,8 @@ export const updateTaskList = (taskList) => ({
   type: actionTypes.UPDATE_TASK_LIST,
   payload: taskList 
 })
+
+export const updateTaskListHistory = (taskListHistory) => ({
+  type: actionTypes.UPDATE_TASK_LIST_HISTORY,
+  payload: taskListHistory 
+})

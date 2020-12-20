@@ -5,5 +5,6 @@ export const routes = {
     HIRE_CANDIDATE:'/hire_candidate',
     ERROR_PAGE:'/error_page',
     TASK_LIST:'/task_list',
-    TASK_HISTORY:'/task_history'
+    TASK_HISTORY:'/task_history',
+    PERFORMANCE_GRAPH:'/performance_graph'
 }

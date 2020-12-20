@@ -445,7 +445,7 @@ export const taskListFromBacklog = [
     dateCreated: moment().subtract(15,'d'),
     taskPercentage: 0,
     priorityLevel: 'urgent',
-    dificultyLevel: 'easy',
+    difficultyLevel: 'easy',
     taskNote: `Must create a presentation and do a pitch day before the completion date.`,
     done:false,
     performanceRate:-1
@@ -461,7 +461,7 @@ export const taskListFromBacklog = [
     dateCreated: moment().subtract(15,'d'),
     taskPercentage: 0,
     priorityLevel: 'normal',
-    dificultyLevel: 'hard',
+    difficultyLevel: 'hard',
     taskNote: `Focus on Pastel Color, prefered blue and simplicity of project must be consider.`,
     done:false,
     performanceRate:-1
@@ -477,7 +477,7 @@ export const taskListFromBacklog = [
     dateCreated: moment().subtract(15,'d'),
     taskPercentage: 0,
     priorityLevel: 'least',
-    dificultyLevel: 'medium',
+    difficultyLevel: 'medium',
     taskNote: `Coordinate first to PM and FE developer`,
     done:false,
     performanceRate:-1
@@ -498,7 +498,7 @@ export const taskListFromTodo = [
     dateCreated: moment().subtract(15,'d'),
     taskPercentage: 0,
     priorityLevel: 'urgent',
-    dificultyLevel: 'hard',
+    difficultyLevel: 'hard',
     taskNote: `Create a documentation and structure analysis`,
     done:false,
     performanceRate:-1
@@ -520,7 +520,7 @@ export const taskListFrominProgressId = [
     dateCreated: moment().subtract(15,'d'),
     taskPercentage: 75,
     priorityLevel: 'urgent',
-    dificultyLevel: 'hard',
+    difficultyLevel: 'hard',
     taskNote: `Create a documentation and structure analysis`,
     done:false,
     performanceRate:-1
@@ -536,7 +536,7 @@ export const taskListFrominProgressId = [
     dateStarted: moment().subtract(1,'d'),
     dateCreated: moment().subtract(15,'d'),
     priorityLevel: 'least',
-    dificultyLevel: 'hard',
+    difficultyLevel: 'hard',
     taskNote: `Coordinate to Steve Cooper to build the FE structure first`,
     done:false,
     performanceRate:-1
@@ -553,7 +553,7 @@ export const taskListFrominProgressId = [
     dateCreated: moment().subtract(15,'d'),
     taskPercentage: 70,
     priorityLevel: 'urgent',
-    dificultyLevel: 'hard',
+    difficultyLevel: 'hard',
     taskNote: `Create a documentation and structure analysis`,
     done:false,
     performanceRate:-1
@@ -575,7 +575,7 @@ export const taskListFromDone = [
     dateCreated: moment().subtract(15,'d'),
   
     priorityLevel: 'urgent',
-    dificultyLevel: 'easy',
+    difficultyLevel: 'easy',
     taskNote: `Priority unit testing and create quick feedback`,
     done:true,
     performanceRate:1
@@ -602,12 +602,109 @@ export const columnsFromBackend =
   }
 }
 
+export const columnsEmpty = 
+{
+  ['backlogId'] : {
+    name: 'Backlog',
+    items: []
+  },
+  ['inProgressId'] : {
+    name: 'In Progress',
+    items: []
+  },
+  ['revisionId'] : {
+    name: 'Bug to fix/For Revision',
+    items: []
+  },
+  ['doneId'] : {
+    name: 'Done',
+    items: []
+  }
+}
+
 
 export const taskHistoryList = [
   {
-    year:2020,
-    month:11,
+    year:'2020',
+    month:'December',
     sprintNumber:1,
+    lastSaveDate: moment().set('month', 11).set('year', 2020).set('date',14),
+    taskHistory:[
+      {
+        id: uuid(),
+        ongoingTaskTitle:'List the Initial feature requeted by the client',
+        name:'Jason Bourne',
+        jobTitle:'Product Manager',
+        picture:img1,
+        completionDate: moment().set('month', 11).set('year', 2020).add(1,'d'),
+        dateStarted: moment().set('month', 11).set('year', 2020),
+        dateCreated: moment().set('month', 11).set('year', 2020),
+        taskPercentage:100,
+        priorityLevel: 'urgent',
+        difficultyLevel: 'easy',
+        taskNote: `Pitch Must be simple`,
+        done:true,
+        performanceRate:1
+        
+      },
+      {
+        id: uuid(),
+        ongoingTaskTitle:'Coordinate to Developers regarding the request of client',
+        name:'Jason Bourne',
+        jobTitle:'Product Manager',
+        picture:img1,
+        completionDate: moment().set('month', 11).set('year', 2020).set('date', 2),
+        dateStarted: moment().set('month', 11).set('year', 2020).set('date', 1),
+        dateCreated: moment().set('month', 11).set('year', 2020).set('date', 1),
+        taskPercentage:100,
+        priorityLevel: 'urgent',
+        difficultyLevel: 'easy',
+        taskNote: `Convert to simple and list all considerations from developers`,
+        done:true,
+        performanceRate:1
+        
+      },
+      {
+        id: uuid(),
+        ongoingTaskTitle:'Write a letter for the initial approved feature to develop',
+        name:'Jason Bourne',
+        jobTitle:'Product Manager',
+        picture:img1,
+        completionDate: moment().set('month', 11).set('year', 2020).set('date', 3),
+        dateStarted: moment().set('month', 11).set('year', 2020).set('date', 1),
+        dateCreated: moment().set('month', 11).set('year', 2020).set('date', 1),
+        taskPercentage:50,
+        priorityLevel: 'urgent',
+        difficultyLevel: 'easy',
+        taskNote: `List down all of the item stated from the developer specially the timeline proposed`,
+        done:false,
+        performanceRate:-1
+        
+      },
+      {
+        id: uuid(),
+        ongoingTaskTitle:'Design a wireframe for login',
+        name:'Stephanie Jane Green',
+        jobTitle:'UI/UX Designer',
+        picture:img2,
+        completionDate: moment().set('month', 11).set('year', 2020).set('date', 5),
+        dateStarted: moment().set('month', 11).set('year', 2020).set('date', 3),
+        dateCreated: moment().set('month', 11).set('year', 2020).set('date', 3),
+        taskPercentage:100,
+        priorityLevel: 'normal',
+        difficultyLevel: 'hard',
+        taskNote: `Do research and client based request`,
+        done:true,
+        performanceRate:4
+        
+      },
+    ]
+  },
+  {
+    year:'2020',
+    month:'November',
+    sprintNumber:1,
+    lastSaveDate: moment().set('month', 10).set('year', 2020).set('date',14),
     taskHistory:[
       {
         id: uuid(),
@@ -620,7 +717,7 @@ export const taskHistoryList = [
         dateCreated: moment().set('month', 10).set('year', 2020),
         taskPercentage:100,
         priorityLevel: 'urgent',
-        dificultyLevel: 'easy',
+        difficultyLevel: 'easy',
         taskNote: `Pitch Must be simple`,
         done:true,
         performanceRate:1
@@ -637,7 +734,7 @@ export const taskHistoryList = [
         dateCreated: moment().set('month', 10).set('year', 2020).set('date', 1),
         taskPercentage:100,
         priorityLevel: 'urgent',
-        dificultyLevel: 'easy',
+        difficultyLevel: 'easy',
         taskNote: `Convert to simple and list all considerations from developers`,
         done:true,
         performanceRate:1
@@ -654,7 +751,7 @@ export const taskHistoryList = [
         dateCreated: moment().set('month', 10).set('year', 2020).set('date', 1),
         taskPercentage:50,
         priorityLevel: 'urgent',
-        dificultyLevel: 'easy',
+        difficultyLevel: 'easy',
         taskNote: `List down all of the item stated from the developer specially the timeline proposed`,
         done:false,
         performanceRate:-1
@@ -671,7 +768,7 @@ export const taskHistoryList = [
         dateCreated: moment().set('month', 10).set('year', 2020).set('date', 3),
         taskPercentage:100,
         priorityLevel: 'normal',
-        dificultyLevel: 'hard',
+        difficultyLevel: 'hard',
         taskNote: `Do research and client based request`,
         done:true,
         performanceRate:4
@@ -688,7 +785,7 @@ export const taskHistoryList = [
         dateCreated: moment().set('month', 10).set('year', 2020).set('date', 5),
         taskPercentage:100,
         priorityLevel: 'normal',
-        dificultyLevel: 'hard',
+        difficultyLevel: 'hard',
         taskNote: `Do research and client based request`,
         done:true,
         performanceRate:4
@@ -705,7 +802,7 @@ export const taskHistoryList = [
         dateCreated: moment().set('month', 10).set('year', 2020).set('date', 1),
         taskPercentage:100,
         priorityLevel: 'least',
-        dificultyLevel: 'medium',
+        difficultyLevel: 'medium',
         taskNote: `Do research for backend structure creation`,
         done:true,
         performanceRate:2
@@ -722,7 +819,7 @@ export const taskHistoryList = [
         dateCreated: moment().set('month', 10).set('year', 2020).set('date', 2),
         taskPercentage:100,
         priorityLevel: 'least',
-        dificultyLevel: 'medium',
+        difficultyLevel: 'medium',
         taskNote: `Coordinate to frontend regarding the integration`,
         done:true,
         performanceRate:2
@@ -740,7 +837,7 @@ export const taskHistoryList = [
         dateCreated: moment().set('month', 10).set('year', 2020).set('date', 1),
         taskPercentage:100,
         priorityLevel: 'urgent',
-        dificultyLevel: 'hard',
+        difficultyLevel: 'hard',
         taskNote: `Create a documentation and structure analysis`,
         done:true,
         performanceRate:5
@@ -757,7 +854,7 @@ export const taskHistoryList = [
         dateCreated: moment().set('month', 10).set('year', 2020).set('date', 1),
         taskPercentage:100,
         priorityLevel: 'urgent',
-        dificultyLevel: 'hard',
+        difficultyLevel: 'hard',
         taskNote: `Create a documentation`,
         done:true,
         performanceRate:5
@@ -774,7 +871,7 @@ export const taskHistoryList = [
         dateCreated: moment().set('month', 10).set('year', 2020).set('date', 1),
         taskPercentage:100,
         priorityLevel: 'urgent',
-        dificultyLevel: 'hard',
+        difficultyLevel: 'hard',
         taskNote: `Create a documentation`,
         done:true,
         performanceRate:5
@@ -791,7 +888,7 @@ export const taskHistoryList = [
         dateCreated: moment().set('month', 10).set('year', 2020).set('date', 1),
         taskPercentage:100,
         priorityLevel: 'urgent',
-        dificultyLevel: 'hard',
+        difficultyLevel: 'hard',
         taskNote: `Create a documentation`,
         done:true,
         performanceRate:5
@@ -808,7 +905,7 @@ export const taskHistoryList = [
         dateCreated: moment().set('month', 10).set('year', 2020).set('date', 1),
         taskPercentage:100,
         priorityLevel: 'urgent',
-        dificultyLevel: 'hard',
+        difficultyLevel: 'hard',
         taskNote: `Create a documentation`,
         done:true,
         performanceRate:5
@@ -825,7 +922,7 @@ export const taskHistoryList = [
         dateStarted: moment().set('month', 10).set('year', 2020).set('date', 2),
         dateCreated: moment().set('month', 10).set('year', 2020).set('date', 1),
         priorityLevel: 'least',
-        dificultyLevel: 'hard',
+        difficultyLevel: 'hard',
         taskNote: `Coordinate to Steve Cooper to build the FE structure first`,
         done:false,
         performanceRate:-1
@@ -843,7 +940,7 @@ export const taskHistoryList = [
         dateCreated: moment().set('month', 10).set('year', 2020).set('date', 1),
       
         priorityLevel: 'urgent',
-        dificultyLevel: 'easy',
+        difficultyLevel: 'easy',
         taskNote: `Double check all possible scenario`,
         done:true,
         performanceRate:3
@@ -852,435 +949,10 @@ export const taskHistoryList = [
     ]
   },
   {
-    year:2020,
-    month:11,
+    year:'2020',
+    month:'November',
     sprintNumber:2,
-    taskHistory:[
-      {
-        id: uuid(),
-        ongoingTaskTitle:'Coordinate to Developers regarding the request of client',
-        name:'Jason Bourne',
-        jobTitle:'Product Manager',
-        picture:img1,
-        completionDate: moment().set('month', 11).set('year', 2020).set('date', 22),
-        dateStarted: moment().set('month', 11).set('year', 2020).set('date', 14),
-        dateCreated: moment().set('month', 11).set('year', 2020).set('date', 14),
-        taskPercentage:100,
-        priorityLevel: 'urgent',
-        dificultyLevel: 'easy',
-        taskNote: `Convert to simple and list all considerations from developers`,
-        done:true,
-        performanceRate:3
-        
-      },
-      {
-        id: uuid(),
-        ongoingTaskTitle:'Write a letter for the initial approved feature to develop',
-        name:'Jason Bourne',
-        jobTitle:'Product Manager',
-        picture:img1,
-        completionDate: moment().set('month', 11).set('year', 2020).set('date', 30),
-        dateStarted: moment().set('month', 11).set('year', 2020).set('date', 22),
-        dateCreated: moment().set('month', 11).set('year', 2020).set('date', 14),
-        taskPercentage:100,
-        priorityLevel: 'urgent',
-        dificultyLevel: 'easy',
-        taskNote: `List down all of the item stated from the developer specially the timeline proposed`,
-        done:true,
-        performanceRate:3
-        
-      },
-      {
-        id: uuid(),
-        ongoingTaskTitle:'Design a wireframe for login',
-        name:'Stephanie Jane Green',
-        jobTitle:'UI/UX Designer',
-        picture:img2,
-        completionDate: moment().set('month', 11).set('year', 2020).set('date', 15),
-        dateStarted: moment().set('month', 11).set('year', 2020).set('date', 13),
-        dateCreated: moment().set('month', 11).set('year', 2020).set('date', 13),
-        taskPercentage:100,
-        priorityLevel: 'normal',
-        dificultyLevel: 'hard',
-        taskNote: `Do research and client based request`,
-        done:true,
-        performanceRate:4
-        
-      },
-      {
-        id: uuid(),
-        ongoingTaskTitle:'Design a wireframe for Landing page and Hiring Page',
-        name:'Stephanie Jane Green',
-        jobTitle:'UI/UX Designer',
-        picture:img2,
-        completionDate: moment().set('month', 11).set('year', 2020).set('date', 30),
-        dateStarted: moment().set('month', 11).set('year', 2020).set('date', 15),
-        dateCreated: moment().set('month', 11).set('year', 2020).set('date', 15),
-        taskPercentage:100,
-        priorityLevel: 'normal',
-        dificultyLevel: 'hard',
-        taskNote: `Do research and client based request`,
-        done:true,
-        performanceRate:4
-        
-      },
-      {
-        id: uuid(),
-        name:'Michael Joe Hofstader',
-        jobTitle:'Backend Developer',
-        picture:img3,
-        ongoingTaskTitle:'Setup backend structure',
-        completionDate: moment().set('month', 11).set('year', 2020).set('date', 30),
-        dateStarted: moment().set('month', 11).set('year', 2020).set('date', 15),
-        dateCreated: moment().set('month', 11).set('year', 2020).set('date', 15),
-        taskPercentage:100,
-        priorityLevel: 'least',
-        dificultyLevel: 'medium',
-        taskNote: `Do research for backend structure creation`,
-        done:true,
-        performanceRate:2
-        
-      },
-      {
-        id: uuid(),
-        name:'Tracy Fowler',
-        jobTitle:'Backend Developer',
-        picture:img6,
-        ongoingTaskTitle:'Research about the firebase',
-        ongoingTaskTitle:'Develop Frontend structure and Redux application',
-        completionDate: moment().set('month', 11).set('year', 2020).set('date',30),
-        dateStarted: moment().set('month', 11).set('year', 2020).set('date', 15),
-        dateCreated: moment().set('month', 11).set('year', 2020).set('date', 15),
-        taskPercentage:100,
-        priorityLevel: 'urgent',
-        dificultyLevel: 'hard',
-        taskNote: `Create a documentation and structure analysis`,
-        done:true,
-        performanceRate:5
-        
-      },
-      {
-        id: uuid(),
-        name:'Steve Cooper',
-        jobTitle:'Frontend Developer',
-        picture:img4,
-        ongoingTaskTitle:'Create a proposal regarding the frontend structure',
-        completionDate: moment().set('month', 11).set('year', 2020).set('date',20),
-        dateStarted: moment().set('month', 11).set('year', 2020).set('date', 14),
-        dateCreated: moment().set('month', 11).set('year', 2020).set('date', 14),
-        taskPercentage:100,
-        priorityLevel: 'urgent',
-        dificultyLevel: 'hard',
-        taskNote: `Create a documentation`,
-        done:true,
-        performanceRate:5
-        
-      },
-      {
-        id: uuid(),
-        name:'Steve Cooper',
-        jobTitle:'Frontend Developer',
-        picture:img4,
-        ongoingTaskTitle:'Coordinate to all developers and pitch the proposed apporach',
-        completionDate: moment().set('month', 11).set('year', 2020).set('date',29),
-        dateStarted: moment().set('month', 11).set('year', 2020).set('date', 13),
-        dateCreated: moment().set('month', 11).set('year', 2020).set('date', 11),
-        taskPercentage:100,
-        priorityLevel: 'urgent',
-        dificultyLevel: 'hard',
-        taskNote: `Create a documentation`,
-        done:true,
-        performanceRate:5
-        
-      },
-      {
-        id: uuid(),
-        name:'Michelle Brand',
-        jobTitle:'Frontend Developer',
-        picture:img5,
-        ongoingTaskTitle:'Study React/ Redux / Saga',
-        taskPercentage:75,
-        completionDate: moment().set('month', 11).set('year', 2020).set('date',30),
-        dateStarted: moment().set('month', 11).set('year', 2020).set('date', 15),
-        dateCreated: moment().set('month', 11).set('year', 2020).set('date', 14),
-        priorityLevel: 'least',
-        dificultyLevel: 'hard',
-        taskNote: `Coordinate to Steve Cooper to build the FE structure first`,
-        done:false,
-        performanceRate:-1
-        
-      },
-      {
-        id: uuid(),
-        name:'Isaac Norman West',
-        jobTitle:'Quality Assurance',
-        picture:img7,
-        ongoingTaskTitle:'Creating Testcase secenario base on Initial feature requested',
-        taskPercentage:100,
-        completionDate: moment().set('month', 11).set('year', 2020).set('date',30),
-        dateStarted: moment().set('month', 11).set('year', 2020).set('date', 15),
-        dateCreated: moment().set('month', 11).set('year', 2020).set('date', 15),
-      
-        priorityLevel: 'urgent',
-        dificultyLevel: 'easy',
-        taskNote: `Double check all possible scenario`,
-        done:true,
-        performanceRate:1
-        
-      },
-    ]
-  },
-  {
-    year:2020,
-    month:10,
-    sprintNumber:1,
-    taskHistory:[
-      {
-        id: uuid(),
-        ongoingTaskTitle:'List the Initial feature requeted by the client',
-        name:'Jason Bourne',
-        jobTitle:'Product Manager',
-        picture:img1,
-        completionDate: moment().set('month', 10).set('year', 2020).add(1,'d'),
-        dateStarted: moment().set('month', 10).set('year', 2020),
-        dateCreated: moment().set('month', 10).set('year', 2020),
-        taskPercentage:100,
-        priorityLevel: 'urgent',
-        dificultyLevel: 'easy',
-        taskNote: `Pitch Must be simple`,
-        done:true,
-        performanceRate:1
-        
-      },
-      {
-        id: uuid(),
-        ongoingTaskTitle:'Coordinate to Developers regarding the request of client',
-        name:'Jason Bourne',
-        jobTitle:'Product Manager',
-        picture:img1,
-        completionDate: moment().set('month', 10).set('year', 2020).set('date', 2),
-        dateStarted: moment().set('month', 10).set('year', 2020).set('date', 1),
-        dateCreated: moment().set('month', 10).set('year', 2020).set('date', 1),
-        taskPercentage:100,
-        priorityLevel: 'urgent',
-        dificultyLevel: 'easy',
-        taskNote: `Convert to simple and list all considerations from developers`,
-        done:true,
-        performanceRate:1
-        
-      },
-      {
-        id: uuid(),
-        ongoingTaskTitle:'Write a letter for the initial approved feature to develop',
-        name:'Jason Bourne',
-        jobTitle:'Product Manager',
-        picture:img1,
-        completionDate: moment().set('month', 10).set('year', 2020).set('date', 3),
-        dateStarted: moment().set('month', 10).set('year', 2020).set('date', 1),
-        dateCreated: moment().set('month', 10).set('year', 2020).set('date', 1),
-        taskPercentage:100,
-        priorityLevel: 'urgent',
-        dificultyLevel: 'easy',
-        taskNote: `List down all of the item stated from the developer specially the timeline proposed`,
-        done:true,
-        performanceRate:1
-        
-      },
-      {
-        id: uuid(),
-        ongoingTaskTitle:'Design a wireframe for login',
-        name:'Stephanie Jane Green',
-        jobTitle:'UI/UX Designer',
-        picture:img2,
-        completionDate: moment().set('month', 10).set('year', 2020).set('date', 5),
-        dateStarted: moment().set('month', 10).set('year', 2020).set('date', 3),
-        dateCreated: moment().set('month', 10).set('year', 2020).set('date', 3),
-        taskPercentage:100,
-        priorityLevel: 'normal',
-        dificultyLevel: 'hard',
-        taskNote: `Do research and client based request`,
-        done:true,
-        performanceRate:3
-        
-      },
-      {
-        id: uuid(),
-        ongoingTaskTitle:'Design a wireframe for Landing page and Hiring Page',
-        name:'Stephanie Jane Green',
-        jobTitle:'UI/UX Designer',
-        picture:img2,
-        completionDate: moment().set('month', 10).set('year', 2020).set('date', 12),
-        dateStarted: moment().set('month', 10).set('year', 2020).set('date', 5),
-        dateCreated: moment().set('month', 10).set('year', 2020).set('date', 5),
-        taskPercentage:100,
-        priorityLevel: 'normal',
-        dificultyLevel: 'hard',
-        taskNote: `Do research and client based request`,
-        done:true,
-        performanceRate:3
-        
-      },
-      {
-        id: uuid(),
-        name:'Michael Joe Hofstader',
-        jobTitle:'Backend Developer',
-        picture:img3,
-        ongoingTaskTitle:'Setup backend structure',
-        completionDate: moment().set('month', 10).set('year', 2020).set('date', 10),
-        dateStarted: moment().set('month', 10).set('year', 2020).set('date', 1),
-        dateCreated: moment().set('month', 10).set('year', 2020).set('date', 1),
-        taskPercentage:100,
-        priorityLevel: 'least',
-        dificultyLevel: 'medium',
-        taskNote: `Do research for backend structure creation`,
-        done:true,
-        performanceRate:2
-        
-      },
-      {
-        id: uuid(),
-        name:'Michael Joe Hofstader',
-        jobTitle:'Backend Developer',
-        picture:img3,
-        ongoingTaskTitle:'Setup Database structure',
-        completionDate: moment().set('month', 10).set('year', 2020).set('date',15),
-        dateStarted: moment().set('month', 10).set('year', 2020).set('date', 2),
-        dateCreated: moment().set('month', 10).set('year', 2020).set('date', 2),
-        taskPercentage:100,
-        priorityLevel: 'least',
-        dificultyLevel: 'medium',
-        taskNote: `Coordinate to frontend regarding the integration`,
-        done:true,
-        performanceRate:2
-        
-      },
-      {
-        id: uuid(),
-        name:'Tracy Fowler',
-        jobTitle:'Backend Developer',
-        picture:img6,
-        ongoingTaskTitle:'Research about the firebase',
-        ongoingTaskTitle:'Develop Frontend structure and Redux application',
-        completionDate: moment().set('month', 10).set('year', 2020).set('date',8),
-        dateStarted: moment().set('month', 10).set('year', 2020).set('date', 1),
-        dateCreated: moment().set('month', 10).set('year', 2020).set('date', 1),
-        taskPercentage:40,
-        priorityLevel: 'urgent',
-        dificultyLevel: 'hard',
-        taskNote: `Create a documentation and structure analysis`,
-        done:false,
-        performanceRate:-1
-        
-      },
-      {
-        id: uuid(),
-        name:'Steve Cooper',
-        jobTitle:'Frontend Developer',
-        picture:img4,
-        ongoingTaskTitle:'Create a proposal regarding the frontend structure',
-        completionDate: moment().set('month', 10).set('year', 2020).set('date',3),
-        dateStarted: moment().set('month', 10).set('year', 2020).set('date', 1),
-        dateCreated: moment().set('month', 10).set('year', 2020).set('date', 1),
-        taskPercentage:100,
-        priorityLevel: 'urgent',
-        dificultyLevel: 'hard',
-        taskNote: `Create a documentation`,
-        done:true,
-        performanceRate:5
-        
-      },
-      {
-        id: uuid(),
-        name:'Steve Cooper',
-        jobTitle:'Frontend Developer',
-        picture:img4,
-        ongoingTaskTitle:'Coordinate to all developers and pitch the proposed apporach',
-        completionDate: moment().set('month', 10).set('year', 2020).set('date',6),
-        dateStarted: moment().set('month', 10).set('year', 2020).set('date', 3),
-        dateCreated: moment().set('month', 10).set('year', 2020).set('date', 1),
-        taskPercentage:100,
-        priorityLevel: 'urgent',
-        dificultyLevel: 'hard',
-        taskNote: `Create a documentation`,
-        done:true,
-        performanceRate:5
-        
-      },
-      {
-        id: uuid(),
-        name:'Steve Cooper',
-        jobTitle:'Frontend Developer',
-        picture:img4,
-        ongoingTaskTitle:'Initiate the Frontend structure',
-        completionDate: moment().set('month', 10).set('year', 2020).set('date',10),
-        dateStarted: moment().set('month', 10).set('year', 2020).set('date', 7),
-        dateCreated: moment().set('month', 10).set('year', 2020).set('date', 1),
-        taskPercentage:100,
-        priorityLevel: 'urgent',
-        dificultyLevel: 'hard',
-        taskNote: `Create a documentation`,
-        done:true,
-        performanceRate:5
-        
-      },
-      {
-        id: uuid(),
-        name:'Steve Cooper',
-        jobTitle:'Frontend Developer',
-        picture:img4,
-        ongoingTaskTitle:'Apply Redux for data management',
-        completionDate: moment().set('month', 10).set('year', 2020).set('date',14),
-        dateStarted: moment().set('month', 10).set('year', 2020).set('date', 11),
-        dateCreated: moment().set('month', 10).set('year', 2020).set('date', 1),
-        taskPercentage:100,
-        priorityLevel: 'urgent',
-        dificultyLevel: 'hard',
-        taskNote: `Create a documentation`,
-        done:true,
-        performanceRate:5
-        
-      },
-      {
-        id: uuid(),
-        name:'Michelle Brand',
-        jobTitle:'Frontend Developer',
-        picture:img5,
-        ongoingTaskTitle:'Study React/ Redux / Saga',
-        taskPercentage:70,
-        completionDate: moment().set('month', 10).set('year', 2020).set('date',14),
-        dateStarted: moment().set('month', 10).set('year', 2020).set('date', 2),
-        dateCreated: moment().set('month', 10).set('year', 2020).set('date', 1),
-        priorityLevel: 'least',
-        dificultyLevel: 'hard',
-        taskNote: `Coordinate to Steve Cooper to build the FE structure first`,
-        done:false,
-        performanceRate:-1
-        
-      },
-      {
-        id: uuid(),
-        name:'Isaac Norman West',
-        jobTitle:'Quality Assurance',
-        picture:img7,
-        ongoingTaskTitle:'Creating Testcase secenario base on Initial feature requested',
-        taskPercentage:80,
-        completionDate: moment().set('month', 10).set('year', 2020).set('date',14),
-        dateStarted: moment().set('month', 10).set('year', 2020).set('date', 1),
-        dateCreated: moment().set('month', 10).set('year', 2020).set('date', 1),
-      
-        priorityLevel: 'urgent',
-        dificultyLevel: 'easy',
-        taskNote: `Double check all possible scenario`,
-        done:false,
-        performanceRate:-1
-        
-      },
-    ]
-  },
-  {
-    year:2020,
-    month:10,
-    sprintNumber:2,
+    lastSaveDate: moment().set('month', 10).set('year', 2020).set('date',28),
     taskHistory:[
       {
         id: uuid(),
@@ -1293,10 +965,10 @@ export const taskHistoryList = [
         dateCreated: moment().set('month', 10).set('year', 2020).set('date', 14),
         taskPercentage:100,
         priorityLevel: 'urgent',
-        dificultyLevel: 'easy',
+        difficultyLevel: 'easy',
         taskNote: `Convert to simple and list all considerations from developers`,
         done:true,
-        performanceRate:1
+        performanceRate:3
         
       },
       {
@@ -1308,12 +980,12 @@ export const taskHistoryList = [
         completionDate: moment().set('month', 10).set('year', 2020).set('date', 30),
         dateStarted: moment().set('month', 10).set('year', 2020).set('date', 22),
         dateCreated: moment().set('month', 10).set('year', 2020).set('date', 14),
-        taskPercentage:70,
+        taskPercentage:100,
         priorityLevel: 'urgent',
-        dificultyLevel: 'easy',
+        difficultyLevel: 'easy',
         taskNote: `List down all of the item stated from the developer specially the timeline proposed`,
-        done:false,
-        performanceRate:-1
+        done:true,
+        performanceRate:3
         
       },
       {
@@ -1327,7 +999,7 @@ export const taskHistoryList = [
         dateCreated: moment().set('month', 10).set('year', 2020).set('date', 13),
         taskPercentage:100,
         priorityLevel: 'normal',
-        dificultyLevel: 'hard',
+        difficultyLevel: 'hard',
         taskNote: `Do research and client based request`,
         done:true,
         performanceRate:4
@@ -1344,7 +1016,7 @@ export const taskHistoryList = [
         dateCreated: moment().set('month', 10).set('year', 2020).set('date', 15),
         taskPercentage:100,
         priorityLevel: 'normal',
-        dificultyLevel: 'hard',
+        difficultyLevel: 'hard',
         taskNote: `Do research and client based request`,
         done:true,
         performanceRate:4
@@ -1361,7 +1033,7 @@ export const taskHistoryList = [
         dateCreated: moment().set('month', 10).set('year', 2020).set('date', 15),
         taskPercentage:100,
         priorityLevel: 'least',
-        dificultyLevel: 'medium',
+        difficultyLevel: 'medium',
         taskNote: `Do research for backend structure creation`,
         done:true,
         performanceRate:2
@@ -1379,7 +1051,7 @@ export const taskHistoryList = [
         dateCreated: moment().set('month', 10).set('year', 2020).set('date', 15),
         taskPercentage:100,
         priorityLevel: 'urgent',
-        dificultyLevel: 'hard',
+        difficultyLevel: 'hard',
         taskNote: `Create a documentation and structure analysis`,
         done:true,
         performanceRate:5
@@ -1396,7 +1068,7 @@ export const taskHistoryList = [
         dateCreated: moment().set('month', 10).set('year', 2020).set('date', 14),
         taskPercentage:100,
         priorityLevel: 'urgent',
-        dificultyLevel: 'hard',
+        difficultyLevel: 'hard',
         taskNote: `Create a documentation`,
         done:true,
         performanceRate:5
@@ -1413,7 +1085,7 @@ export const taskHistoryList = [
         dateCreated: moment().set('month', 10).set('year', 2020).set('date', 11),
         taskPercentage:100,
         priorityLevel: 'urgent',
-        dificultyLevel: 'hard',
+        difficultyLevel: 'hard',
         taskNote: `Create a documentation`,
         done:true,
         performanceRate:5
@@ -1425,15 +1097,15 @@ export const taskHistoryList = [
         jobTitle:'Frontend Developer',
         picture:img5,
         ongoingTaskTitle:'Study React/ Redux / Saga',
-        taskPercentage:80,
+        taskPercentage:75,
         completionDate: moment().set('month', 10).set('year', 2020).set('date',30),
         dateStarted: moment().set('month', 10).set('year', 2020).set('date', 15),
         dateCreated: moment().set('month', 10).set('year', 2020).set('date', 14),
         priorityLevel: 'least',
-        dificultyLevel: 'hard',
+        difficultyLevel: 'hard',
         taskNote: `Coordinate to Steve Cooper to build the FE structure first`,
         done:false,
-        performanceRate:5
+        performanceRate:-1
         
       },
       {
@@ -1448,7 +1120,435 @@ export const taskHistoryList = [
         dateCreated: moment().set('month', 10).set('year', 2020).set('date', 15),
       
         priorityLevel: 'urgent',
-        dificultyLevel: 'easy',
+        difficultyLevel: 'easy',
+        taskNote: `Double check all possible scenario`,
+        done:true,
+        performanceRate:1
+        
+      },
+    ]
+  },
+  {
+    year:'2020',
+    month:'October',
+    sprintNumber:1,
+    lastSaveDate: moment().set('month', 9).set('year', 2020).set('date',14),
+    taskHistory:[
+      {
+        id: uuid(),
+        ongoingTaskTitle:'List the Initial feature requeted by the client',
+        name:'Jason Bourne',
+        jobTitle:'Product Manager',
+        picture:img1,
+        completionDate: moment().set('month', 9).set('year', 2020).add(1,'d'),
+        dateStarted: moment().set('month', 9).set('year', 2020),
+        dateCreated: moment().set('month', 9).set('year', 2020),
+        taskPercentage:100,
+        priorityLevel: 'urgent',
+        difficultyLevel: 'easy',
+        taskNote: `Pitch Must be simple`,
+        done:true,
+        performanceRate:1
+        
+      },
+      {
+        id: uuid(),
+        ongoingTaskTitle:'Coordinate to Developers regarding the request of client',
+        name:'Jason Bourne',
+        jobTitle:'Product Manager',
+        picture:img1,
+        completionDate: moment().set('month', 9).set('year', 2020).set('date', 2),
+        dateStarted: moment().set('month', 9).set('year', 2020).set('date', 1),
+        dateCreated: moment().set('month', 9).set('year', 2020).set('date', 1),
+        taskPercentage:100,
+        priorityLevel: 'urgent',
+        difficultyLevel: 'easy',
+        taskNote: `Convert to simple and list all considerations from developers`,
+        done:true,
+        performanceRate:1
+        
+      },
+      {
+        id: uuid(),
+        ongoingTaskTitle:'Write a letter for the initial approved feature to develop',
+        name:'Jason Bourne',
+        jobTitle:'Product Manager',
+        picture:img1,
+        completionDate: moment().set('month', 9).set('year', 2020).set('date', 3),
+        dateStarted: moment().set('month', 9).set('year', 2020).set('date', 1),
+        dateCreated: moment().set('month', 9).set('year', 2020).set('date', 1),
+        taskPercentage:100,
+        priorityLevel: 'urgent',
+        difficultyLevel: 'easy',
+        taskNote: `List down all of the item stated from the developer specially the timeline proposed`,
+        done:true,
+        performanceRate:1
+        
+      },
+      {
+        id: uuid(),
+        ongoingTaskTitle:'Design a wireframe for login',
+        name:'Stephanie Jane Green',
+        jobTitle:'UI/UX Designer',
+        picture:img2,
+        completionDate: moment().set('month', 9).set('year', 2020).set('date', 5),
+        dateStarted: moment().set('month', 9).set('year', 2020).set('date', 3),
+        dateCreated: moment().set('month', 9).set('year', 2020).set('date', 3),
+        taskPercentage:100,
+        priorityLevel: 'normal',
+        difficultyLevel: 'hard',
+        taskNote: `Do research and client based request`,
+        done:true,
+        performanceRate:3
+        
+      },
+      {
+        id: uuid(),
+        ongoingTaskTitle:'Design a wireframe for Landing page and Hiring Page',
+        name:'Stephanie Jane Green',
+        jobTitle:'UI/UX Designer',
+        picture:img2,
+        completionDate: moment().set('month', 9).set('year', 2020).set('date', 12),
+        dateStarted: moment().set('month', 9).set('year', 2020).set('date', 5),
+        dateCreated: moment().set('month', 9).set('year', 2020).set('date', 5),
+        taskPercentage:100,
+        priorityLevel: 'normal',
+        difficultyLevel: 'hard',
+        taskNote: `Do research and client based request`,
+        done:true,
+        performanceRate:3
+        
+      },
+      {
+        id: uuid(),
+        name:'Michael Joe Hofstader',
+        jobTitle:'Backend Developer',
+        picture:img3,
+        ongoingTaskTitle:'Setup backend structure',
+        completionDate: moment().set('month', 9).set('year', 2020).set('date', 10),
+        dateStarted: moment().set('month', 9).set('year', 2020).set('date', 1),
+        dateCreated: moment().set('month', 9).set('year', 2020).set('date', 1),
+        taskPercentage:100,
+        priorityLevel: 'least',
+        difficultyLevel: 'medium',
+        taskNote: `Do research for backend structure creation`,
+        done:true,
+        performanceRate:2
+        
+      },
+      {
+        id: uuid(),
+        name:'Michael Joe Hofstader',
+        jobTitle:'Backend Developer',
+        picture:img3,
+        ongoingTaskTitle:'Setup Database structure',
+        completionDate: moment().set('month', 9).set('year', 2020).set('date',15),
+        dateStarted: moment().set('month', 9).set('year', 2020).set('date', 2),
+        dateCreated: moment().set('month', 9).set('year', 2020).set('date', 2),
+        taskPercentage:100,
+        priorityLevel: 'least',
+        difficultyLevel: 'medium',
+        taskNote: `Coordinate to frontend regarding the integration`,
+        done:true,
+        performanceRate:2
+        
+      },
+      {
+        id: uuid(),
+        name:'Tracy Fowler',
+        jobTitle:'Backend Developer',
+        picture:img6,
+        ongoingTaskTitle:'Research about the firebase',
+        ongoingTaskTitle:'Develop Frontend structure and Redux application',
+        completionDate: moment().set('month', 9).set('year', 2020).set('date',8),
+        dateStarted: moment().set('month', 9).set('year', 2020).set('date', 1),
+        dateCreated: moment().set('month', 9).set('year', 2020).set('date', 1),
+        taskPercentage:40,
+        priorityLevel: 'urgent',
+        difficultyLevel: 'hard',
+        taskNote: `Create a documentation and structure analysis`,
+        done:false,
+        performanceRate:-1
+        
+      },
+      {
+        id: uuid(),
+        name:'Steve Cooper',
+        jobTitle:'Frontend Developer',
+        picture:img4,
+        ongoingTaskTitle:'Create a proposal regarding the frontend structure',
+        completionDate: moment().set('month', 9).set('year', 2020).set('date',3),
+        dateStarted: moment().set('month', 9).set('year', 2020).set('date', 1),
+        dateCreated: moment().set('month', 9).set('year', 2020).set('date', 1),
+        taskPercentage:100,
+        priorityLevel: 'urgent',
+        difficultyLevel: 'hard',
+        taskNote: `Create a documentation`,
+        done:true,
+        performanceRate:5
+        
+      },
+      {
+        id: uuid(),
+        name:'Steve Cooper',
+        jobTitle:'Frontend Developer',
+        picture:img4,
+        ongoingTaskTitle:'Coordinate to all developers and pitch the proposed apporach',
+        completionDate: moment().set('month', 9).set('year', 2020).set('date',6),
+        dateStarted: moment().set('month', 9).set('year', 2020).set('date', 3),
+        dateCreated: moment().set('month', 9).set('year', 2020).set('date', 1),
+        taskPercentage:100,
+        priorityLevel: 'urgent',
+        difficultyLevel: 'hard',
+        taskNote: `Create a documentation`,
+        done:true,
+        performanceRate:5
+        
+      },
+      {
+        id: uuid(),
+        name:'Steve Cooper',
+        jobTitle:'Frontend Developer',
+        picture:img4,
+        ongoingTaskTitle:'Initiate the Frontend structure',
+        completionDate: moment().set('month', 9).set('year', 2020).set('date',10),
+        dateStarted: moment().set('month', 9).set('year', 2020).set('date', 7),
+        dateCreated: moment().set('month', 9).set('year', 2020).set('date', 1),
+        taskPercentage:100,
+        priorityLevel: 'urgent',
+        difficultyLevel: 'hard',
+        taskNote: `Create a documentation`,
+        done:true,
+        performanceRate:5
+        
+      },
+      {
+        id: uuid(),
+        name:'Steve Cooper',
+        jobTitle:'Frontend Developer',
+        picture:img4,
+        ongoingTaskTitle:'Apply Redux for data management',
+        completionDate: moment().set('month', 9).set('year', 2020).set('date',14),
+        dateStarted: moment().set('month', 9).set('year', 2020).set('date', 11),
+        dateCreated: moment().set('month', 9).set('year', 2020).set('date', 1),
+        taskPercentage:100,
+        priorityLevel: 'urgent',
+        difficultyLevel: 'hard',
+        taskNote: `Create a documentation`,
+        done:true,
+        performanceRate:5
+        
+      },
+      {
+        id: uuid(),
+        name:'Michelle Brand',
+        jobTitle:'Frontend Developer',
+        picture:img5,
+        ongoingTaskTitle:'Study React/ Redux / Saga',
+        taskPercentage:70,
+        completionDate: moment().set('month', 9).set('year', 2020).set('date',14),
+        dateStarted: moment().set('month', 9).set('year', 2020).set('date', 2),
+        dateCreated: moment().set('month', 9).set('year', 2020).set('date', 1),
+        priorityLevel: 'least',
+        difficultyLevel: 'hard',
+        taskNote: `Coordinate to Steve Cooper to build the FE structure first`,
+        done:false,
+        performanceRate:-1
+        
+      },
+      {
+        id: uuid(),
+        name:'Isaac Norman West',
+        jobTitle:'Quality Assurance',
+        picture:img7,
+        ongoingTaskTitle:'Creating Testcase secenario base on Initial feature requested',
+        taskPercentage:80,
+        completionDate: moment().set('month', 9).set('year', 2020).set('date',14),
+        dateStarted: moment().set('month', 9).set('year', 2020).set('date', 1),
+        dateCreated: moment().set('month', 9).set('year', 2020).set('date', 1),
+      
+        priorityLevel: 'urgent',
+        difficultyLevel: 'easy',
+        taskNote: `Double check all possible scenario`,
+        done:false,
+        performanceRate:-1
+        
+      },
+    ]
+  },
+  {
+    year:'2020',
+    month:'October',
+    sprintNumber:2,
+    lastSaveDate: moment().set('month', 9).set('year', 2020).set('date',25),
+    taskHistory:[
+      {
+        id: uuid(),
+        ongoingTaskTitle:'Coordinate to Developers regarding the request of client',
+        name:'Jason Bourne',
+        jobTitle:'Product Manager',
+        picture:img1,
+        completionDate: moment().set('month', 9).set('year', 2020).set('date', 22),
+        dateStarted: moment().set('month', 9).set('year', 2020).set('date', 14),
+        dateCreated: moment().set('month', 9).set('year', 2020).set('date', 14),
+        taskPercentage:100,
+        priorityLevel: 'urgent',
+        difficultyLevel: 'easy',
+        taskNote: `Convert to simple and list all considerations from developers`,
+        done:true,
+        performanceRate:1
+        
+      },
+      {
+        id: uuid(),
+        ongoingTaskTitle:'Write a letter for the initial approved feature to develop',
+        name:'Jason Bourne',
+        jobTitle:'Product Manager',
+        picture:img1,
+        completionDate: moment().set('month', 9).set('year', 2020).set('date', 30),
+        dateStarted: moment().set('month', 9).set('year', 2020).set('date', 22),
+        dateCreated: moment().set('month', 9).set('year', 2020).set('date', 14),
+        taskPercentage:70,
+        priorityLevel: 'urgent',
+        difficultyLevel: 'easy',
+        taskNote: `List down all of the item stated from the developer specially the timeline proposed`,
+        done:false,
+        performanceRate:-1
+        
+      },
+      {
+        id: uuid(),
+        ongoingTaskTitle:'Design a wireframe for login',
+        name:'Stephanie Jane Green',
+        jobTitle:'UI/UX Designer',
+        picture:img2,
+        completionDate: moment().set('month', 9).set('year', 2020).set('date', 15),
+        dateStarted: moment().set('month', 9).set('year', 2020).set('date', 13),
+        dateCreated: moment().set('month', 9).set('year', 2020).set('date', 13),
+        taskPercentage:100,
+        priorityLevel: 'normal',
+        difficultyLevel: 'hard',
+        taskNote: `Do research and client based request`,
+        done:true,
+        performanceRate:4
+        
+      },
+      {
+        id: uuid(),
+        ongoingTaskTitle:'Design a wireframe for Landing page and Hiring Page',
+        name:'Stephanie Jane Green',
+        jobTitle:'UI/UX Designer',
+        picture:img2,
+        completionDate: moment().set('month', 9).set('year', 2020).set('date', 30),
+        dateStarted: moment().set('month', 9).set('year', 2020).set('date', 15),
+        dateCreated: moment().set('month', 9).set('year', 2020).set('date', 15),
+        taskPercentage:100,
+        priorityLevel: 'normal',
+        difficultyLevel: 'hard',
+        taskNote: `Do research and client based request`,
+        done:true,
+        performanceRate:4
+        
+      },
+      {
+        id: uuid(),
+        name:'Michael Joe Hofstader',
+        jobTitle:'Backend Developer',
+        picture:img3,
+        ongoingTaskTitle:'Setup backend structure',
+        completionDate: moment().set('month', 9).set('year', 2020).set('date', 30),
+        dateStarted: moment().set('month', 9).set('year', 2020).set('date', 15),
+        dateCreated: moment().set('month', 9).set('year', 2020).set('date', 15),
+        taskPercentage:100,
+        priorityLevel: 'least',
+        difficultyLevel: 'medium',
+        taskNote: `Do research for backend structure creation`,
+        done:true,
+        performanceRate:2
+        
+      },
+      {
+        id: uuid(),
+        name:'Tracy Fowler',
+        jobTitle:'Backend Developer',
+        picture:img6,
+        ongoingTaskTitle:'Research about the firebase',
+        ongoingTaskTitle:'Develop Frontend structure and Redux application',
+        completionDate: moment().set('month', 9).set('year', 2020).set('date',30),
+        dateStarted: moment().set('month', 9).set('year', 2020).set('date', 15),
+        dateCreated: moment().set('month', 9).set('year', 2020).set('date', 15),
+        taskPercentage:100,
+        priorityLevel: 'urgent',
+        difficultyLevel: 'hard',
+        taskNote: `Create a documentation and structure analysis`,
+        done:true,
+        performanceRate:5
+        
+      },
+      {
+        id: uuid(),
+        name:'Steve Cooper',
+        jobTitle:'Frontend Developer',
+        picture:img4,
+        ongoingTaskTitle:'Create a proposal regarding the frontend structure',
+        completionDate: moment().set('month', 9).set('year', 2020).set('date',20),
+        dateStarted: moment().set('month', 9).set('year', 2020).set('date', 14),
+        dateCreated: moment().set('month', 9).set('year', 2020).set('date', 14),
+        taskPercentage:100,
+        priorityLevel: 'urgent',
+        difficultyLevel: 'hard',
+        taskNote: `Create a documentation`,
+        done:true,
+        performanceRate:5
+        
+      },
+      {
+        id: uuid(),
+        name:'Steve Cooper',
+        jobTitle:'Frontend Developer',
+        picture:img4,
+        ongoingTaskTitle:'Coordinate to all developers and pitch the proposed apporach',
+        completionDate: moment().set('month', 9).set('year', 2020).set('date',29),
+        dateStarted: moment().set('month', 9).set('year', 2020).set('date', 13),
+        dateCreated: moment().set('month', 9).set('year', 2020).set('date', 11),
+        taskPercentage:100,
+        priorityLevel: 'urgent',
+        difficultyLevel: 'hard',
+        taskNote: `Create a documentation`,
+        done:true,
+        performanceRate:5
+        
+      },
+      {
+        id: uuid(),
+        name:'Michelle Brand',
+        jobTitle:'Frontend Developer',
+        picture:img5,
+        ongoingTaskTitle:'Study React/ Redux / Saga',
+        taskPercentage:80,
+        completionDate: moment().set('month', 9).set('year', 2020).set('date',30),
+        dateStarted: moment().set('month', 9).set('year', 2020).set('date', 15),
+        dateCreated: moment().set('month', 9).set('year', 2020).set('date', 14),
+        priorityLevel: 'least',
+        difficultyLevel: 'hard',
+        taskNote: `Coordinate to Steve Cooper to build the FE structure first`,
+        done:false,
+        performanceRate:5
+        
+      },
+      {
+        id: uuid(),
+        name:'Isaac Norman West',
+        jobTitle:'Quality Assurance',
+        picture:img7,
+        ongoingTaskTitle:'Creating Testcase secenario base on Initial feature requested',
+        taskPercentage:100,
+        completionDate: moment().set('month', 9).set('year', 2020).set('date',30),
+        dateStarted: moment().set('month', 9).set('year', 2020).set('date', 15),
+        dateCreated: moment().set('month', 9).set('year', 2020).set('date', 15),
+      
+        priorityLevel: 'urgent',
+        difficultyLevel: 'easy',
         taskNote: `Double check all possible scenario`,
         done:true,
         performanceRate:3

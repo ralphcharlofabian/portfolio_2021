@@ -38,19 +38,22 @@ const Sidebar = ({collapsed}) => {
               About me
             </Link>
             </Menu.Item>
-            <Menu.Item key="3" icon={<PieChartOutlined />}>
-              Graph
-            </Menu.Item>
-            <Menu.Item key="4" key={routes.TASK_LIST} icon={<AppstoreOutlined />}>
+           
+            <Menu.Item key={routes.TASK_LIST} icon={<AppstoreOutlined />}>
               <Link to={routes.TASK_LIST}> 
                 Task List
               </Link> 
-            </Menu.Item><Menu.Item key="5" key={routes.TASK_HISTORY} icon={<ApartmentOutlined />}>
+            </Menu.Item><Menu.Item key={routes.TASK_HISTORY} icon={<ApartmentOutlined />}>
               <Link to={routes.TASK_HISTORY}> 
                 Task History
               </Link> 
             </Menu.Item>
-            <Menu.Item key="6" key={routes.HIRE_CANDIDATE} icon={<UserAddOutlined />}>
+            <Menu.Item key={routes.PERFORMANCE_GRAPH} icon={<PieChartOutlined />}>
+            <Link to={routes.PERFORMANCE_GRAPH}> 
+              Performance Graph
+            </Link>
+            </Menu.Item>
+            <Menu.Item key={routes.HIRE_CANDIDATE} icon={<UserAddOutlined />}>
               <Link to={routes.HIRE_CANDIDATE}> 
                 Hire Candidate
               </Link>  

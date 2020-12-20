@@ -11,6 +11,7 @@ import HireCandidate from '../HireCandidate';
 import ErrorPage from '../ErrorPages';
 import TaskList from '../TaskList';
 import TaskHistory from '../TaskHistory';
+import PerformanceGraph from '../PerformanceGraph'
 
 const Routes = () => {
     return (
@@ -23,6 +24,7 @@ const Routes = () => {
               <Route exact path={routes.ERROR_PAGE} component={ErrorPage} />
               <Route exact path={routes.TASK_LIST} component={TaskList} />
               <Route exact path={routes.TASK_HISTORY} component={TaskHistory} />
+              <Route exact path={routes.PERFORMANCE_GRAPH} component={PerformanceGraph} />
  
               <Route path="*" render={
                 () => (<Redirect to={routes.ERROR_PAGE}/>)

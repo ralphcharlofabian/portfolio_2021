@@ -28,7 +28,8 @@ import {
   FireOutlined,
   DislikeOutlined,
   LikeOutlined,
-  CalendarOutlined
+  CalendarOutlined,
+  FilterOutlined
 } from '@ant-design/icons';
 
 //constants
@@ -40,17 +41,87 @@ const { Header, Sider, Content } = Layout;
 
 const TaskHistory = () => {
 
-    const taskListReducer = useSelector(state => state.taskListReducer); 
-    const {taskHistoryList} = taskListReducer;
+    const taskListHistoryReducer = useSelector(state => state.taskListHistoryReducer); 
+    console.log(taskListHistoryReducer,'taskListHistoryReducer')
+    const {taskHistoryList} = taskListHistoryReducer;
 
+    const [taskList, setTaskHistoryList] = useState(taskHistoryList ? taskHistoryList : []);
+    const [filteredTaskList, setFilteredTaskList] = useState();
+    const [selectedYear, setSelectedYear] = useState();
+    const [selectedMonth, setSelectedMonth] = useState();
     const [collapsed, setCollapsed] = useState(false);
 
-    const [taskRate, setTaskRate] = useState(0);
+    console.log(taskList,'taskList')
 
     const toggle = () => {
         setCollapsed(!collapsed)
     }
+    
+    const selectYear = (year) => {
+      setSelectedYear(year);
+    }
+    const selectMonth = (month) => {
+      setSelectedMonth(month);
+    }
 
+    const menuYear = () => {
+      let uniqTaskYear = [...new Set(taskHistoryList.map (task => task.year))];
+      return (
+        <Menu width={100}>
+          {uniqTaskYear? uniqTaskYear.map(year =>
+            <Menu.Item>
+              <Row onClick={()=>selectYear(year)} >
+                  <h4 style={{margin:0}}>{year}</h4>
+              </Row>
+            </Menu.Item>
+            ) : ''} 
+        </Menu>
+      )
+    }
+
+    const menuMonth = () => {
+      let uniqTaskMonth = [...new Set(taskHistoryList.map (task => task.month))];
+      return (
+        <Menu width={100}>
+          {uniqTaskMonth? uniqTaskMonth.map(month =>
+            <Menu.Item>
+              <Row onClick={()=>selectMonth(month)} style={{width:100}}>
+                  <h4 style={{margin:0}}>{month}</h4>
+              </Row>
+            </Menu.Item>
+            ) : ''} 
+        </Menu>
+      )
+    }
+   
+    const setFilterByDate = () => {
+      let filtered =  taskHistoryList.filter(task=> task.year === selectedYear && task.month === selectedMonth);
+      openNotificationWithIcon('success');
+      setTaskHistoryList(filtered);
+
+    }
+
+    const openNotificationWithIcon = type => {
+      notification[type]({
+        message: 'Filter Applied Successfully'
+      });
+    }; 
+
+    const menuPersonel = () => {
+      let uniqPersonel = [...new Set(taskHistoryList.map (task => [...new Set(task.taskHistory.map(personel=>personel.name ))]))];
+      console.log(uniqPersonel,'uniqPersonel')
+      // return (
+      //   <Menu width={100}>
+      //     {uniqTaskMonth? uniqTaskMonth.map(month =>
+      //       <Menu.Item>
+      //         <Row onClick={()=>selectMonth(month)} style={{width:100}}>
+      //             <h4 style={{margin:0}}>{month}</h4>
+      //         </Row>
+      //       </Menu.Item>
+      //       ) : ''} 
+      //   </Menu>
+      // )
+    }
 
     return (
       <Layout>
@@ -70,10 +141,40 @@ const TaskHistory = () => {
               }}
             >
             <Card style={{width:'100%'}} size='small'>
-              Filter:
+              <Row>
+               
+                <Col span={4}>
+                  <Row justify='space-around'>
+                    <div>
+                      <Dropdown overlay={menuYear}>
+                        <Button>{selectedYear? selectedYear : 'Year Fiter'}</Button>
+                      </Dropdown>
+                    </div>
+                    <div>
+                      <Dropdown overlay={menuMonth}>
+                        <Button>{selectedMonth? selectedMonth : 'Month Filter'}</Button>
+                      </Dropdown>
+                    </div>
+                    { selectedYear && selectedMonth ? 
+                      <Tooltip placement="top" title='Filter Task History' >
+                        <Button type="primary" shape="circle" onClick={setFilterByDate}><FilterOutlined /></Button>
+                      </Tooltip>: 
+                      <Tooltip placement="top" title='Select Year and Month to filter' >
+                        <Button disabled type="text"><FilterOutlined /></Button> 
+                      </Tooltip>
+                      }
+                     
+                  </Row>
+                </Col>
+                <Divider type='vertical' style={{height:30, paddingRight:10}}/>
+                <Col>
+                <Button onClick={menuPersonel}>Personel Filter</Button>
+                </Col>
+               
+              </Row>
             </Card>
             <Row>
-              {taskHistoryList? taskHistoryList.map(taskInfo => 
+              {taskList? taskList.map(taskInfo => 
                 <>
                 {taskInfo.sprintNumber ===1 ?
                 <Col span={12} style={{padding:5}}>
@@ -110,10 +211,10 @@ const TaskHistory = () => {
                       
                             </Col>
                             <Col span={5} style={{paddingLeft:5}}>
-                              <Tooltip placement="top" title={item.dificultyLevel} >
-                                {item ? (item.dificultyLevel === 'easy' ? <RestOutlined style={{ fontSize: 35, color: '#036636', padding:3 }}/> : '') : ''}
-                                {item ? (item.dificultyLevel === 'medium' ? <RestOutlined style={{ fontSize: 35, color: '#2c538f',padding:3 }}/> : '') : ''}
-                                {item ? (item.dificultyLevel === 'hard' ? <RestOutlined style={{ fontSize: 35, color: '#c456ec',padding:3  }}/> : '') : ''}
+                              <Tooltip placement="top" title={item.difficultyLevel} >
+                                {item ? (item.difficultyLevel === 'easy' ? <RestOutlined style={{ fontSize: 35, color: '#036636', padding:3 }}/> : '') : ''}
+                                {item ? (item.difficultyLevel === 'medium' ? <RestOutlined style={{ fontSize: 35, color: '#2c538f',padding:3 }}/> : '') : ''}
+                                {item ? (item.difficultyLevel === 'hard' ? <RestOutlined style={{ fontSize: 35, color: '#c456ec',padding:3  }}/> : '') : ''}
                               </Tooltip>
                               <Tooltip placement="top" title={item.priorityLevel} >
                       
@@ -124,7 +225,7 @@ const TaskHistory = () => {
                                <Tooltip placement="top" title={item.done=== true? 'done' : 'un done'} >
                                 {item ? (item.done === true ? <LikeOutlined  style={{ fontSize: 35, color: '#22bb33',padding:3  }}/> : <DislikeOutlined style={{ fontSize: 35, color: '#ff6961',padding:3  }}/>) : ''}
                               </Tooltip>
-                              {/* {performanceRate(item.dificultyLevel, item.priorityLevel, item.done)} */}
+                              {/* {performanceRate(item.difficultyLevel, item.priorityLevel, item.done)} */}
                               
                             </Col>
                             <Col span={1}>
@@ -176,10 +277,10 @@ const TaskHistory = () => {
                     
                           </Col>
                           <Col span={5} style={{paddingLeft:5}}>
-                            <Tooltip placement="top" title={item.dificultyLevel} >
-                              {item ? (item.dificultyLevel === 'easy' ? <RestOutlined style={{ fontSize: 35, color: '#036636',padding:3  }}/> : '') : ''}
-                              {item ? (item.dificultyLevel === 'medium' ? <RestOutlined style={{ fontSize: 35, color: '#2c538f',padding:3  }}/> : '') : ''}
-                              {item ? (item.dificultyLevel === 'hard' ? <RestOutlined style={{ fontSize: 35, color: '#c456ec',padding:3  }}/> : '') : ''}
+                            <Tooltip placement="top" title={item.difficultyLevel} >
+                              {item ? (item.difficultyLevel === 'easy' ? <RestOutlined style={{ fontSize: 35, color: '#036636',padding:3  }}/> : '') : ''}
+                              {item ? (item.difficultyLevel === 'medium' ? <RestOutlined style={{ fontSize: 35, color: '#2c538f',padding:3  }}/> : '') : ''}
+                              {item ? (item.difficultyLevel === 'hard' ? <RestOutlined style={{ fontSize: 35, color: '#c456ec',padding:3  }}/> : '') : ''}
                             </Tooltip>
                             <Tooltip placement="top" title={item.priorityLevel} >
                     
@@ -188,7 +289,7 @@ const TaskHistory = () => {
                               {item ? (item.priorityLevel === 'least' ? <FireOutlined style={{ fontSize: 35, color: '#ffdf9e',padding:3  }}/> : '') : ''}
                             </Tooltip>
                             <Tooltip placement="top" title={item.done=== true? 'done' : 'un done'} >
-                              {item ? (item.done === true ? <LikeOutlined  style={{ fontSize: 35, color: '#22bb33' ,padding:3 }}/> : <DislikeOutlined style={{ fontSize: 35, color: '#ff6961',padding:3  }}/>) : ''}
+                              {item ? (item.done === true ? <LikeOutlined  style={{ fontSize: 35, color: '#22bb33' ,padding:3 }}/> : <DislikeOutlined style={{ fontSize: 35, color: '#e82d23',padding:3  }}/>) : ''}
                             </Tooltip>
                             
                           </Col>

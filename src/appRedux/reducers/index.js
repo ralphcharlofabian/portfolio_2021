@@ -46,9 +46,25 @@ function taskListReducer (state = initialState, action) {
   }
 }
 
+function taskListHistoryReducer (state = initialState, action) {
+  let { type, payload } = action || {};
+  console.log(payload,'payload')
+  switch (type) {
+    case actionTypes.UPDATE_TASK_LIST_HISTORY:
+      return {
+        ...state,
+        taskHistoryList: payload,
+      }
+    
+    default:
+    return state
+  }
+}
+
 const rootReducer = combineReducers({
   userListReducer,
   taskListReducer,
+  taskListHistoryReducer,
 });
 
 export default rootReducer;

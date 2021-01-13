@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import {  useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 
-import { Layout, Card, Row, Avatar, Drawer, Col, Divider, Rate, Button, Tooltip, Modal, Upload, Input, Dropdown, Menu, DatePicker, InputNumber, notification } from 'antd';
+import { Layout, Card, Row, Avatar, Drawer, Col, Divider, Rate, Button, Tooltip, Modal, Upload, Input, Dropdown, Menu, DatePicker, InputNumber, notification, Popover } from 'antd';
 import ImgCrop from 'antd-img-crop';
 import {
   DoubleRightOutlined,
@@ -19,6 +20,7 @@ import Sidebar from '../../common/components/Sidebar';
 import {updateCandidateList, updatePersonelList} from '../../appRedux/actions'
 import {jobTitleList} from '../../common/constants/miscellaneous'
 import uuid from 'uuid/v4'
+import personal1 from '../../assets/personal1.jpg'
 
 // function
 import initMap from '../../common/functions/map';
@@ -58,7 +60,7 @@ const HireCandidate = () => {
     maplocation:'',
     eMail:'',
     birthDate:moment(),
-    personalMessage:'',
+    pitch:'',
     specificSkills:'',
     qaRating:0,
     feRating:0,
@@ -165,6 +167,7 @@ const HireCandidate = () => {
 
     setSelectedInfo();
     setShowDrawer(false);
+    candidateHIred('success')
   }
 
   const onCLickEdit = (selectedApplicant) => {
@@ -204,7 +207,7 @@ const HireCandidate = () => {
       maplocation:'',
       eMail:'',
       birthDate:moment(),
-      personalMessage:'',
+      pitch:'',
       specificSkills:'',
       qaRating:0,
       feRating:0,
@@ -289,6 +292,12 @@ const HireCandidate = () => {
     });
   };
 
+  const candidateHIred = type => {
+    notification[type]({
+      message: 'Candidate Successfully Hired'
+    });
+  };
+
   const onClickDeleteCandidate = (selectedCandidate) => {
     setShowPersonelModal(true);
     setSelectedInfo(selectedCandidate);
@@ -330,7 +339,16 @@ const HireCandidate = () => {
         <Sidebar collapsed={collapsed}/>
         <Layout className="site-layout">
         <Header className="site-layout-background" style={{ height: 55, paddingLeft:10 }}>
-          {collapsed ? <DoubleRightOutlined style={{fontSize:25}} onClick={toggle}/> :  <DoubleLeftOutlined style={{fontSize:25}} onClick={toggle}/>}
+          <Col span={21}>
+            {collapsed ? <DoubleRightOutlined style={{fontSize:25}} onClick={toggle}/> :  <DoubleLeftOutlined style={{fontSize:25}} onClick={toggle}/>}
+          </Col>
+          <Col span={3}>
+            <Link to={routes.ABOUT_ME}> 
+              <Button style={{height:45}} type="text">
+                <Avatar src={personal1} size={35} style={{marginRight:10}}/> About the Developer
+              </Button>
+            </Link>
+          </Col>
         </Header>
           <Content
             className="site-layout-background"
@@ -343,11 +361,14 @@ const HireCandidate = () => {
           >
             <Row >
             { candidateList? candidateList.map(candidate=>
+
               <Card style={{ width: window.screen.width/8, margin:10,  }} hoverable  size='small'>
                 <UserDeleteOutlined style={{position:'absolute', top:5, right: 0, width:30, height:30}} onClick={()=>onClickDeleteCandidate(candidate)}/>
                 <div onClick={()=>showUserInfo(candidate)}>
                   <div style={{textAlign:'center'}}>
-                    <Avatar src={candidate.picture} size={150}/>
+                    <Popover content={(<p>{candidate.pitch}</p>)} placement="topRight">
+                      <Avatar src={candidate.picture} size={150}/>
+                    </Popover>
                     <h4 style={{paddingTop:10}}>{candidate.name}</h4>
                   </div>
                   <Row justify='space-between'>
@@ -384,7 +405,7 @@ const HireCandidate = () => {
               <h2 style={{paddingTop:5, paddingBottom:0, marginBottom:0}}>{selectedInfo.name}</h2>
               <h4><span style={{color: '#7f7f7f', paddingRight:5}}>{`Position:  `}</span> {selectedInfo.jobTitle}</h4>
               <h4><span style={{color: '#7f7f7f', paddingRight:5}}>{`Years of Experience:  `}</span>{selectedInfo.yearsExp}</h4>
-              <h4><span style={{color: '#7f7f7f', paddingRight:5}}>{`Personal Remarks:  `}</span>{selectedInfo.specificSkills}</h4>
+              <h4><span style={{color: '#7f7f7f', paddingRight:5}}>{`Pitch:  `}</span>{selectedInfo.pitch}</h4>
             </>
                : ''}
             </Col>
@@ -449,7 +470,7 @@ const HireCandidate = () => {
           </Row>
           <Row style={{paddingTop:30}} justify='space-between'>
             <Button size='large' type="primary" style={{height:50, width:100, borderRadius:5}} onClick={()=>onCLickHire(selectedInfo)}>Hire Me</Button>
-            <Button size='large' type="text" style={{height:50, width:150, borderRadius:5}} onClick={()=>onCLickEdit(selectedInfo)}>Edit Candidate</Button>
+            <Button size='large' style={{height:50, width:150, borderRadius:5}} onClick={()=>onCLickEdit(selectedInfo)}>Edit Candidate</Button>
             
           </Row>
         </Drawer>
@@ -514,7 +535,7 @@ const HireCandidate = () => {
               </Col>
             </Row>
             <Row style={{marginTop:10}}>
-              <TextArea rows={2} placeholder="Personal Remarks" value={tempCandidateInfo.personalMessage} onChange={onchangeItems} name="personalMessage"/>
+              <TextArea rows={2} placeholder="Pitch" value={tempCandidateInfo.pitch} onChange={onchangeItems} name="pitch"/>
             </Row>
             <Divider orientation="left" plain><span style={{color: '#7f7f7f', fontSize:12, paddingTop:12}}>Contact Info</span></Divider>
 

@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import {  useSelector, useDispatch } from 'react-redux';
+import moment from 'moment';
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, BarChart, Bar, Brush, ReferenceLine
 } from 'recharts';
-import { Layout, Card, Row, Col } from 'antd';
+
+import CountUp from 'react-countup';
+import { Layout, Card, Row, Col, Tabs, Avatar, Tooltip as TooltipAnt, Progress  } from 'antd';
 import {
   DoubleRightOutlined,
   DoubleLeftOutlined,
   RestOutlined,
   FireOutlined,
   LikeOutlined,
-  DislikeOutlined
+  DislikeOutlined,
+  UserOutlined
 } from '@ant-design/icons';
 
 //constants
@@ -18,12 +22,12 @@ import { routes } from '../../common/constants/routes';
 import Sidebar from '../../common/components/Sidebar';
 
 const { Header, Sider, Content } = Layout;
-
+const { TabPane } = Tabs;
 
 const PerformaceGraph = () => {
   const taskListHistoryReducer = useSelector(state => state.taskListHistoryReducer); 
   console.log(taskListHistoryReducer,'taskListHistoryReducer')
-  const {taskHistoryList} = taskListHistoryReducer;
+  const {taskHistoryList, userList } = taskListHistoryReducer;
 
   const [taskList, setTaskHistoryList] = useState(taskHistoryList ? taskHistoryList : []);
   const [taskLiskData, setTaskLiskData] = useState([]);
@@ -87,13 +91,58 @@ const PerformaceGraph = () => {
     let difficultyLevelOccurrences = tempDifficultyLevelArr.reduce((prev, curr) => (prev[curr] = ++prev[curr] || 1, prev), {});
 
     let tempIsTaskDoneArr = x.taskHistory.map(x => {return(x.done)});
-    console.log(tempIsTaskDoneArr,'tempIsTaskDoneArrtempIsTaskDoneArr')
     let tempIsTaskDoneMostOcc = mostOccurence(tempIsTaskDoneArr);
-    console.log(tempIsTaskDoneMostOcc,'tempIsTaskDoneMostOcc')
     let IsTaskDoneOcc = tempIsTaskDoneArr.reduce((prev, curr) => (prev[curr] = ++prev[curr] || 1, prev), {});
 
-    
+    let tempSprintMvp = x.taskHistory.map(x=> {
+      if (x.done) {
+        return ({
+          name: x.name,
+          performanceRate: x.performanceRate
+        })
+      }
+      
+    }).filter(x=> x !== undefined)
 
+    console.log(tempSprintMvp,'tempSprintMvp')
+
+/// work here
+
+// function mvpChecker(arr) {
+  
+//   var mf = 1;
+//   var m = 0;
+//   var item = {
+//     name:'',
+//     performanceRate:0,
+//   }
+//   for (var i=0; i<arr.length; i++) {
+//     for (var j=i; j<arr.length; j++)
+//     {
+//             if (arr[i].name == arr[j].name)
+//              m++;
+             
+//             if (mf<m)
+//             {
+//               mf=m; 
+
+//               item.name = arr[i].name;
+//               item.performanceRate = arr[i].performanceRate + arr[j].performanceRate
+//             }
+//     }
+//     m=0;
+//   }
+
+//   return item;
+// }
+
+// let test = [];
+// test.push(mvpChecker(tempSprintMvp));
+
+// console.log(test,'teasdasdasds')
+
+/// end work here
+ 
     let tempData = {
       dateBlock:`${x.month.substring(0,3)}, Sprint:${x.sprintNumber}, ${x.year}`,
       performanceRateAve: tempPerformanceRateAve,
@@ -116,12 +165,24 @@ const PerformaceGraph = () => {
 
     taskLiskData.unshift(tempData);
 
-
-
   })
 
-    console.log(taskLiskData,'taskLiskData')
 
+  // End of main Computation from task history
+
+
+  //console.log(taskLiskData,'taskLiskData')
+
+
+  let lineupInfoFe = userList.map(x => {return x.feRating}).reduce((a, b) => a + b, 0)
+  let lineupInfoBe = userList.map(x => {return x.beRating}).reduce((a, b) => a + b, 0)
+  let lineupInfoDes = userList.map(x => {return x.designRating}).reduce((a, b) => a + b, 0)
+  let lineupInfoProd = userList.map(x => {return x.prodMgtRating}).reduce((a, b) => a + b, 0)
+  let lineupInfoQa = userList.map(x => {return x.qaRating}).reduce((a, b) => a + b, 0)
+
+  // let tempDifficultyLevelArr = x.taskHistory.map(x => {return(x.difficultyLevel)});
+  // let tempMostDifficultyLevel = mostOccurence(tempDifficultyLevelArr);
+  // let difficultyLevelOccurrences = tempDifficultyLevelArr.reduce((prev, curr) => (prev[curr] = ++prev[curr] || 1, prev), {});
 
     const [collapsed, setCollapsed] = useState(false);
     const toggle = () => {
@@ -145,80 +206,182 @@ const PerformaceGraph = () => {
                 //overflow: 'auto',
               }}
             >
-              <Row>
-                <Card>
-                  <LineChart width={window.innerWidth - 274} height={300} data={taskLiskData}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="dateBlock" padding={{ left: 30, right: 30 }} />
-                    <YAxis />
-                    <Tooltip />
-                    {/* <Legend /> */}
-                    <Line type="monotone" dataKey="noOfTask" stroke="#8884d8" activeDot={{ r: 5 }} />
-                    <Line type="monotone" dataKey="performanceRateTotal" stroke="#cc30d1" activeDot={{ r: 5 }} />
-                    <Line type="monotone" dataKey="taskPercentageAve" stroke="#82ca9d" activeDot={{ r: 5 }}/>
-                    <Brush dataKey="dateBlock" height={8} stroke="#1890ff" />
-                  </LineChart>
-                </Card>
-              </Row>
+              
               <Row justify='space-between'>
                 <Col style={{paddingTop:2, paddingRight:2}} span={8}>
-                  <Card >
+                  <Row justify='space-between'>
+                    <Col span={6} >
+                      <Card size="small">
+                        <p style={{margin:0, marginBottom:10}}>Total Sprint Count:</p>
+                        <span style={{fontSize:40}}>
+                          <CountUp 
+                            end={taskList ? taskList.length : 0}
+                            duration={4}
+                            decimals={0}/>
+                        </span>
+                      </Card>
+                    </Col>
+                    <Col span={18}>
+                      <Card size="small">
+                        <p style={{margin:0}}>Project Title: <span style={{fontSize:18, paddingLeft:5}}>PERFORMANCE TRUST SCALE</span></p>
+                        <Progress percent={20} size="small" status="active"/>
+                        <p style={{margin:0}}>{`Start Date: ${moment().set('month', 8).set('year', 2020).set('date',25).format('MMM, d, yyyy')}`}</p>
+                        <p style={{margin:0}}>{`End Date: ${moment().add(4,'month').format('MMM, d, yyyy')}`}</p>
+                      </Card>
+                    </Col>
+                  </Row>
+                  
                   <Row>
-                      <Col span={14}>
-                        <h4>Difficulty Level Count</h4>
-                      </Col>
-                      <Col span={10}>
-                        <span style={{color: '#036636', paddingLeft:3}}>easy <RestOutlined style={{ fontSize: 15, color: '#036636'  }}/></span>
-                        <span style={{color: '#2c538f', paddingLeft:15}}>medium <RestOutlined style={{ fontSize: 15, color: '#2c538f'  }}/></span>
-                        <span style={{color: '#c456ec', paddingLeft:15}}>hard <RestOutlined style={{ fontSize: 15, color: '#c456ec'  }}/></span>  
-                      </Col>
-                    </Row>
-                    <BarChart
-                      width={500}
-                      height={300}
-                      data={taskLiskData}
-                    >
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="dateBlock" />
-                      <YAxis />
-                      <Tooltip />
-                      <Bar dataKey="difficultyLeastCount" fill="#50c878" />
-                      <Bar dataKey="difficultyNormalCount" fill="#6189c7" />
-                      <Bar dataKey="difficultyHardCount" fill="#c456ec" />
-                      <Brush dataKey="dateBlock" height={8} stroke="#1890ff" />
-                    </BarChart>
-                  </Card>
+                    <Col span={24} style={{marginTop:2}}>
+                      <Card size="small">
+                      <p>Employee Committed in this project:</p>
+                      {userList? userList.map(user=>
+                      <>
+                        <TooltipAnt title={user.name} placement="top">
+                          <Avatar src={user.picture} size={40} style={{margin:4}}/>
+                         </TooltipAnt>
+                        
+                      </>
+                      ): ''}
+                    </Card>
+                  </Col>
+                  </Row>
+
+                  <Row>
+                    <Col span={24} style={{marginTop:2}}>
+                      <Card size="small">
+                      <p style={{margin:0}}>Team Composition:</p>
+                      <Row>
+                        <Col span={3}>
+                          Frontend
+                        </Col>
+                        <Col span={21}>
+                          <Progress percent={lineupInfoFe? lineupInfoFe : 0} size="small" />
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col span={3}>
+                          Backend
+                        </Col>
+                        <Col span={21}>
+                          <Progress percent={lineupInfoBe ? lineupInfoBe : 0} size="small" />
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col span={3}>
+                          Design
+                        </Col>
+                        <Col span={21}>
+                          <Progress percent={lineupInfoDes ? lineupInfoDes : 0} size="small" />
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col span={3}>
+                          Quality
+                        </Col>
+                        <Col span={21}>
+                          <Progress percent={lineupInfoQa ? lineupInfoQa : 0} size="small" />
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col span={3}>
+                          Prod Mgt.
+                        </Col>
+                        <Col span={21}>
+                          <Progress percent={lineupInfoProd ? lineupInfoProd : 0} size="small" />
+                        </Col>
+                      </Row>
+                      <Row justify='end'>
+                        <p style={{marginTop:11, color:'lightgray'}}><span>* This shows the combined skills of all employee committed to this project</span></p>
+                      </Row>
+                    </Card>
+                  </Col>
+                  </Row>
+                  {/* <Row>
+                    <Col span={24}>
+                        <Card size="small" >
+                          <p style={{marginBottom:20}}>Note:</p> 
+                        </Card>
+                    </Col>
+                  </Row> */}
+                  
                 </Col>
                 <Col style={{padding:2}} span={8}>
-                  <Card >
-                    <Row>
-                      <Col span={14}>
-                        <h4>Urgent Level Count</h4>
-                      </Col>
-                      <Col span={10}>
-                        <span style={{color: '#ffdf9e', paddingLeft:3}}>least <FireOutlined style={{ fontSize: 15, color: '#ffdf9e'  }}/></span>
-                        <span style={{color: '#ff975a', paddingLeft:15}}>normal <FireOutlined style={{ fontSize: 15, color: '#ff975a'  }}/></span>
-                        <span style={{color: '#ff6961', paddingLeft:15}}>urgent <FireOutlined style={{ fontSize: 15, color: '#ff6961'  }}/></span>
-                      </Col>
-                    </Row>
-                    <BarChart
-                      width={500}
-                      height={300}
-                      data={taskLiskData}
-                    >
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="dateBlock" />
-                      <YAxis />
-                      <Tooltip />
-                      <Bar dataKey="priorityLeastCount" fill="#ffdf9e" />
-                      <Bar dataKey="priorityNormalCount" fill="#ff975a" />
-                      <Bar dataKey="priorityUrgentCount" fill="#ff6961" />
-                      <Brush dataKey="dateBlock" height={8} stroke="#1890ff" />
-                    </BarChart>
+                  <Card size="small">
+                    <Tabs defaultActiveKey="2">
+                      <TabPane
+                        tab={
+                          <span>
+                            <RestOutlined />
+                            Difficulty Level
+                          </span>
+                        }
+                        key="1" >
+                      <Row>
+                          <Col span={14}>
+                            <h4>Difficulty Level Count</h4>
+                          </Col>
+                          <Col span={10}>
+                            <span style={{color: '#036636', paddingLeft:3}}>easy <RestOutlined style={{ fontSize: 15, color: '#036636'  }}/></span>
+                            <span style={{color: '#2c538f', paddingLeft:15}}>medium <RestOutlined style={{ fontSize: 15, color: '#2c538f'  }}/></span>
+                            <span style={{color: '#c456ec', paddingLeft:15}}>hard <RestOutlined style={{ fontSize: 15, color: '#c456ec'  }}/></span>  
+                          </Col>
+                        </Row>
+                        <BarChart
+                          width={500}
+                          height={300}
+                          data={taskLiskData}>
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis dataKey="dateBlock" />
+                          <YAxis />
+                          <Tooltip />
+                          <Bar dataKey="difficultyLeastCount" fill="#50c878" />
+                          <Bar dataKey="difficultyNormalCount" fill="#6189c7" />
+                          <Bar dataKey="difficultyHardCount" fill="#c456ec" />
+                          <Brush dataKey="dateBlock" height={8} stroke="#1890ff" />
+                        </BarChart>
+                      </TabPane>
+                      <TabPane
+                        tab={
+                          <span>
+                            <FireOutlined />
+                            Urgent Level
+                          </span>
+                        }
+                        key="2"
+                      >
+                        <Row>
+                          <Col span={14}>
+                            <h4>Urgent Level Count</h4>
+                          </Col>
+                          <Col span={10}>
+                            <span style={{color: '#ffdf9e', paddingLeft:3}}>least <FireOutlined style={{ fontSize: 15, color: '#ffdf9e'  }}/></span>
+                            <span style={{color: '#ff975a', paddingLeft:15}}>normal <FireOutlined style={{ fontSize: 15, color: '#ff975a'  }}/></span>
+                            <span style={{color: '#ff6961', paddingLeft:15}}>urgent <FireOutlined style={{ fontSize: 15, color: '#ff6961'  }}/></span>
+                          </Col>
+                        </Row>
+                        <BarChart
+                          width={500}
+                          height={300}
+                          data={taskLiskData}
+                        >
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis dataKey="dateBlock" />
+                          <YAxis />
+                          <Tooltip />
+                          <Bar dataKey="priorityLeastCount" fill="#ffdf9e" />
+                          <Bar dataKey="priorityNormalCount" fill="#ff975a" />
+                          <Bar dataKey="priorityUrgentCount" fill="#ff6961" />
+                          <Brush dataKey="dateBlock" height={8} stroke="#1890ff" />
+                        </BarChart>
+                      </TabPane>
+                    </Tabs>,
+                  
+
                   </Card>
                 </Col>
                 <Col style={{paddingTop:2, paddingLeft:2}} span={8}>
-                <Card >
+                <Card size="small">
                     <Row>
                       <Col span={15}>
                         <h4>Task Completion Count</h4>
@@ -230,7 +393,7 @@ const PerformaceGraph = () => {
                     </Row>
                     <BarChart
                       width={500}
-                      height={300}
+                      height={384}
                       data={taskLiskData}
                     >
                       <CartesianGrid strokeDasharray="3 3" />
@@ -244,6 +407,23 @@ const PerformaceGraph = () => {
                     </BarChart>
                   </Card>
                 </Col>
+              </Row>
+
+              <Row style={{marginTop:8}}>
+                <Card>
+                  <h4>Performance Projection</h4>
+                  <LineChart width={window.innerWidth - 274} height={300} data={taskLiskData}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="dateBlock" padding={{ left: 30, right: 30 }} />
+                    <YAxis />
+                    <Tooltip />
+                    {/* <Legend /> */}
+                    <Line type="monotone" dataKey="noOfTask" stroke="#8884d8" activeDot={{ r: 5 }} />
+                    <Line type="monotone" dataKey="performanceRateTotal" stroke="#cc30d1" activeDot={{ r: 5 }} />
+                    <Line type="monotone" dataKey="taskPercentageAve" stroke="#82ca9d" activeDot={{ r: 5 }}/>
+                    <Brush dataKey="dateBlock" height={8} stroke="#1890ff" />
+                  </LineChart>
+                </Card>
               </Row>
               
             

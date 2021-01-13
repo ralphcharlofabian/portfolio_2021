@@ -64,6 +64,10 @@ const TaskHistory = () => {
       setSelectedMonth(month);
     }
 
+    const removeFilter = () => {
+      setSelectedMonth();
+      setSelectedYear();
+    }
     const menuYear = () => {
       let uniqTaskYear = [...new Set(taskHistoryList.map (task => task.year))];
       return (
@@ -142,7 +146,10 @@ const TaskHistory = () => {
             >
             <Card style={{width:'100%'}} size='small'>
               <Row>
-               
+               <Col span={2}> 
+                  <Button disabled={!(selectedYear || selectedMonth)} onClick={removeFilter}>Remove Filter</Button> 
+               </Col>
+               <Divider type='vertical' style={{height:30, paddingRight:10}}/>
                 <Col span={4}>
                   <Row justify='space-around'>
                     <div>
@@ -168,7 +175,7 @@ const TaskHistory = () => {
                 </Col>
                 <Divider type='vertical' style={{height:30, paddingRight:10}}/>
                 <Col>
-                <Button onClick={menuPersonel}>Personel Filter</Button>
+                <Button onClick={menuPersonel} disabled>Personel Filter</Button>
                 </Col>
                
               </Row>
@@ -183,7 +190,7 @@ const TaskHistory = () => {
                     title={ 
                       <div style={{padding:0}}> 
                         <CalendarOutlined /> 
-                        <span style={{marginLeft:8, marginRight:3}}>Year:</span>{`${taskInfo.year}`}<span style={{marginLeft:10, marginRight:0}}>Month:</span> {`${taskInfo.month}`}<span style={{marginLeft:10, marginRight:0}}>Sprint Number:</span> {`${taskInfo.sprintNumber}`}
+                        <span style={{marginLeft:8, marginRight:3, color:'#7f7f7f'}}>Yr:</span>{`${taskInfo.year}`}<span style={{marginLeft:10, marginRight:0, color:'#7f7f7f'}}>Mo:</span> {`${taskInfo.month}`}<span style={{marginLeft:10, marginRight:0}}>Sprint:</span> {`${taskInfo.sprintNumber}`}
                       </div>} style={{backgroundColor:'#def3fd'}}>
                     {taskInfo.taskHistory ? taskInfo.taskHistory.map(item => 
                       <div                    
@@ -249,7 +256,7 @@ const TaskHistory = () => {
                     title={ 
                       <div style={{padding:0}}> 
                         <CalendarOutlined /> 
-                        <span style={{marginLeft:8, marginRight:3}}>Year:</span>{`${taskInfo.year}`}<span style={{marginLeft:10, marginRight:0}}>Month:</span> {`${taskInfo.month}`}<span style={{marginLeft:10, marginRight:0}}>Sprint Number:</span> {`${taskInfo.sprintNumber}`}
+                        <span style={{marginLeft:8, marginRight:3, color:'#7f7f7f'}}>Year:</span>{`${taskInfo.year}`}<span style={{marginLeft:10, marginRight:0, color:'#7f7f7f'}}>Month:</span> {`${taskInfo.month}`}<span style={{marginLeft:10, marginRight:0}}>Sprint Number:</span> {`${taskInfo.sprintNumber}`}
                       </div>} style={{backgroundColor:'#def3fd'}}>
                     {taskInfo.taskHistory ? taskInfo.taskHistory.map(item => 
                     <div                    

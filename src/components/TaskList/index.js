@@ -41,7 +41,8 @@ import {
 import Sidebar from '../../common/components/Sidebar';
 import {updateTaskList, updateTaskListHistory} from '../../appRedux/actions'
 import {columnsEmpty} from '../../common/constants/miscellaneous'
-
+import personal1 from '../../assets/personal1.jpg'
+import { routes } from '../../common/constants/routes';
 
 //functions
 import {performanceRate} from '../../common/functions/miscellaneous';
@@ -605,9 +606,18 @@ const TaskList = () => {
     return (
       <Layout>
         <Sidebar collapsed={collapsed}/>
-        <Layout className="site-layout">
-        <Header className="site-layout-background" style={{ height: 55, paddingLeft:10 }}>
-              {collapsed ? <DoubleRightOutlined style={{fontSize:25}} onClick={toggle}/> :  <DoubleLeftOutlined style={{fontSize:25}} onClick={toggle}/>}
+          <Layout className="site-layout">
+            <Header className="site-layout-background" style={{ height: 55, paddingLeft:10 }}>
+                <Col span={21}>
+                  {collapsed ? <DoubleRightOutlined style={{fontSize:25}} onClick={toggle}/> :  <DoubleLeftOutlined style={{fontSize:25}} onClick={toggle}/>}
+                </Col>
+                <Col span={3}>
+                  {/* <Link to={routes.ABOUT_ME}> 
+                    <Button style={{height:45}} type="text">
+                      <Avatar src={personal1} size={35} style={{marginRight:10}}/> About the Developer
+                    </Button>
+                  </Link> */}
+                </Col>  
             </Header>
             <Content
               className="site-layout-background"

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
-import { Card, Row, Col, Input, Button, Tooltip, Modal } from 'antd';
-import { UserOutlined, EyeOutlined, InfoCircleOutlined, LoginOutlined } from '@ant-design/icons';
+import { Card, Row, Col, Input, Button, Tooltip, Modal, Result } from 'antd';
+import { UserOutlined, EyeOutlined, InfoCircleOutlined, LoginOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import Fade from 'react-reveal/Fade';
 
 import feDeskImage from '../../assets/feDeskImage.svg'
@@ -14,12 +14,41 @@ import { routes } from '../../common/constants/routes';
 const Login = () => {
 
     const [showInfoModal, setShowInfoModal] = useState(false);
+    const [selectedUser, setSelectedUser] = useState('admin');
+    const [credentials, setCredentials] = useState({
+        userName: 'Admin@performanceTrustScale.com',
+        password:'@dm1n_811'
+    });
+
+    const onClickToggle = (user) => {
+        setSelectedUser(user)
+
+        if (user === 'admin') {
+            setCredentials({
+                userName: 'Admin@performanceTrustScale.com',
+                password:'@dm1n_pts'
+            })
+        } else {
+            setCredentials({
+                userName: 'Employee@performanceTrustScale.com',
+                password:'3mpl0y33_pts'
+            })
+        }
+    }
+
     const onClickShowInfoModal = () => {
         setShowInfoModal(true);
       }
     const handleCancelInfoModal = () => {
         setShowInfoModal(false);
     }
+
+    const onchangeItems = (e) => {
+        setCredentials({
+          ...credentials,
+          [e.target.name]: e.target.value
+        })
+      }
 
     return (
        <div style={{backgroundColor:'#c899ff', height: window.innerHeight, paddingTop: 160, paddingLeft:'10%'}}>
@@ -37,19 +66,37 @@ const Login = () => {
                                  <Row style={{marginTop:'12%'}}>
                                     <Col span={2}></Col>
                                     <Col span={20}>
-                                        <Input size="large" placeholder="Username" prefix={<UserOutlined />} />
+                                        <Input size="large" placeholder="Username" prefix={<UserOutlined />} value={credentials.userName} onChange={onchangeItems} name='userName'/>
                                     </Col>
                                     <Col span={2}></Col> 
                                  </Row>
                                  <Row style={{marginTop:'5%'}}>
                                     <Col span={2}></Col>
                                     <Col span={20}>
-                                        <Input size="large" placeholder="Password" prefix={<EyeOutlined />}/>
+                                        <Input.Password 
+                                            size="large" 
+                                            placeholder="Password"
+                                            prefix={<EyeOutlined />}
+                                            iconRender={visible => (visible ? <EyeOutlined /> : <EyeInvisibleOutlined />)}
+                                            value={credentials.password} onChange={onchangeItems} name='password'/>
                                     </Col>
                                     <Col span={2}></Col> 
                                  </Row>
                                  <Row style={{marginTop:'5%'}}>
-                                    <Col span={18}></Col>
+                                     <Col span={2}></Col>
+                                     <Col span={3}><p style={{color:'#fafafa', marginBottom:0, opacity:.70, paddingTop:3}}>Sign in as: </p></Col>
+                                    <Col span={3} style={{paddingRight:5}}>
+                                        {selectedUser === 'admin' ? 
+                                        <Button style={{opacity:.70}} onClick={()=>onClickToggle('admin')}>Admin</Button> :
+                                        <Button style={{opacity:.20}} onClick={()=>onClickToggle('admin')}>Admin</Button>
+                                        }
+                                    </Col>
+                                    <Col span={10}>
+                                        {selectedUser === 'employee' ? 
+                                        <Button style={{opacity:.70}} onClick={()=>onClickToggle('employee')}>Employee</Button> :
+                                        <Button style={{opacity:.20}} onClick={()=>onClickToggle('employee')}>Employee</Button>
+                                        }
+                                    </Col>
                                     <Col span={4}>
                                         <Link to={routes.PERSONEL_LIST_PAGE}>
                                             <Button icon={<LoginOutlined />} style={{height:40, color:'white', backgroundColor:'#c456ec'}}> LOGIN  </Button>
@@ -91,7 +138,7 @@ const Login = () => {
                 visible={showInfoModal}
                 onCancel={handleCancelInfoModal}
                 footer={null}>
-                    <Row>
+                    {/* <Row>
                         <span>
                             <b> Administrator:</b>
                             <UserOutlined style={{marginLeft:25, marginRight:5}} />
@@ -117,6 +164,12 @@ const Login = () => {
                             <EyeOutlined style={{marginLeft:15,marginRight:5}}/>
                             Emp123
                         </span>
+                    </Row> */}
+                    <Row>
+                        <Result
+                          status="warning"
+                          title="Authentication is currently on going, you may continue by clicking LOGIN with any credentials"
+                        />
                     </Row>
 
             </Modal>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
-import { Layout, Menu } from 'antd';
+import { Divider, Layout, Menu, Avatar, Button } from 'antd';
 import {
   UserOutlined,
   PieChartOutlined,
@@ -9,11 +9,14 @@ import {
   BarsOutlined,
   UserAddOutlined,
   AppstoreOutlined,
-  ApartmentOutlined
+  ApartmentOutlined,
+  LogoutOutlined,
+  BugOutlined
 } from '@ant-design/icons';
 
 //constants
 import { routes } from '../constants/routes';
+import personal1 from '../../assets/personal1.jpg'
 
 const { Header, Sider, Content } = Layout;
 
@@ -33,11 +36,11 @@ const Sidebar = ({collapsed}) => {
               Personel List
             </Link>  
             </Menu.Item>
-            <Menu.Item key={routes.ABOUT_ME} icon={<UserOutlined />}>
+            {/* <Menu.Item key={routes.ABOUT_ME} icon={<UserOutlined />}>
             <Link to={routes.ABOUT_ME}> 
               About me
             </Link>
-            </Menu.Item>
+            </Menu.Item> */}
            
             <Menu.Item key={routes.TASK_LIST} icon={<AppstoreOutlined />}>
               <Link to={routes.TASK_LIST}> 
@@ -58,6 +61,20 @@ const Sidebar = ({collapsed}) => {
                 Hire Candidate
               </Link>  
             </Menu.Item>
+            <Menu.Item key={routes.ABOUT_ME} icon={<BugOutlined />}>
+              <Link to={routes.ABOUT_ME} > 
+                
+                   About the Developer
+               
+              </Link>
+            </Menu.Item>
+            <Divider style={{marginTop:0,marginBottom:5}}/>
+            <Menu.Item key={routes.LOGIN_PAGE} icon={<LogoutOutlined />}>
+              <Link to={routes.LOGIN_PAGE}> 
+                Log out
+              </Link>  
+            </Menu.Item>
+            
           </Menu>
         </Sider>
       );

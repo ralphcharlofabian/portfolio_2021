@@ -26,11 +26,13 @@ const { TabPane } = Tabs;
 
 const PerformaceGraph = () => {
   const taskListHistoryReducer = useSelector(state => state.taskListHistoryReducer); 
+  const userListReducer = useSelector(state => state.userListReducer); 
   console.log(taskListHistoryReducer,'taskListHistoryReducer')
-  const {taskHistoryList, userList } = taskListHistoryReducer;
-
+  const {taskHistoryList } = taskListHistoryReducer;
+  const { userList } = userListReducer;
   const [taskList, setTaskHistoryList] = useState(taskHistoryList ? taskHistoryList : []);
   const [taskLiskData, setTaskLiskData] = useState([]);
+  const [userListInfo, setUserListInfo] =useState(userList ? userList : [])
   const [taskData, setTaskData] = useState({
     dateBlock:'',
     PerformanceRateAve: 0,
@@ -174,11 +176,11 @@ const PerformaceGraph = () => {
   //console.log(taskLiskData,'taskLiskData')
 
 
-  let lineupInfoFe = userList.map(x => {return x.feRating}).reduce((a, b) => a + b, 0)
-  let lineupInfoBe = userList.map(x => {return x.beRating}).reduce((a, b) => a + b, 0)
-  let lineupInfoDes = userList.map(x => {return x.designRating}).reduce((a, b) => a + b, 0)
-  let lineupInfoProd = userList.map(x => {return x.prodMgtRating}).reduce((a, b) => a + b, 0)
-  let lineupInfoQa = userList.map(x => {return x.qaRating}).reduce((a, b) => a + b, 0)
+  let lineupInfoFe = userListInfo.map(x => {return x.feRating}).reduce((a, b) => a + b, 0)
+  let lineupInfoBe = userListInfo.map(x => {return x.beRating}).reduce((a, b) => a + b, 0)
+  let lineupInfoDes = userListInfo.map(x => {return x.designRating}).reduce((a, b) => a + b, 0)
+  let lineupInfoProd = userListInfo.map(x => {return x.prodMgtRating}).reduce((a, b) => a + b, 0)
+  let lineupInfoQa = userListInfo.map(x => {return x.qaRating}).reduce((a, b) => a + b, 0)
 
   // let tempDifficultyLevelArr = x.taskHistory.map(x => {return(x.difficultyLevel)});
   // let tempMostDifficultyLevel = mostOccurence(tempDifficultyLevelArr);
@@ -235,7 +237,7 @@ const PerformaceGraph = () => {
                     <Col span={24} style={{marginTop:2}}>
                       <Card size="small">
                       <p>Employee Committed in this project:</p>
-                      {userList? userList.map(user=>
+                      {userListInfo? userListInfo.map(user=>
                       <>
                         <TooltipAnt title={user.name} placement="top">
                           <Avatar src={user.picture} size={40} style={{margin:4}}/>

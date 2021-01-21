@@ -6,5 +6,6 @@ export const routes = {
     ERROR_PAGE:'/error_page',
     TASK_LIST:'/task_list',
     TASK_HISTORY:'/task_history',
-    PERFORMANCE_GRAPH:'/performance_graph'
+    PERFORMANCE_GRAPH:'/performance_graph',
+    ABOUT_THE_APP:'/about_the_app'
 }

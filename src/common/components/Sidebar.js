@@ -11,7 +11,8 @@ import {
   AppstoreOutlined,
   ApartmentOutlined,
   LogoutOutlined,
-  BugOutlined
+  BugOutlined,
+  LaptopOutlined
 } from '@ant-design/icons';
 
 //constants
@@ -61,11 +62,14 @@ const Sidebar = ({collapsed}) => {
                 Hire Candidate
               </Link>  
             </Menu.Item>
+            <Menu.Item key={routes.ABOUT_THE_APP} icon={<LaptopOutlined />}>
+              <Link to={routes.ABOUT_THE_APP}> 
+                About the App
+              </Link>  
+            </Menu.Item>
             <Menu.Item key={routes.ABOUT_ME} icon={<BugOutlined />}>
               <Link to={routes.ABOUT_ME} > 
-                
                    About the Developer
-               
               </Link>
             </Menu.Item>
             <Divider style={{marginTop:0,marginBottom:5}}/>

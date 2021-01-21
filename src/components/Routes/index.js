@@ -12,6 +12,7 @@ import ErrorPage from '../ErrorPages';
 import TaskList from '../TaskList';
 import TaskHistory from '../TaskHistory';
 import PerformanceGraph from '../PerformanceGraph'
+import AboutTheApp from '../AboutTheApp';
 
 const Routes = () => {
     return (
@@ -25,6 +26,7 @@ const Routes = () => {
               <Route exact path={routes.TASK_LIST} component={TaskList} />
               <Route exact path={routes.TASK_HISTORY} component={TaskHistory} />
               <Route exact path={routes.PERFORMANCE_GRAPH} component={PerformanceGraph} />
+              <Route exact path={routes.ABOUT_THE_APP} component={AboutTheApp} />
  
               <Route path="*" render={
                 () => (<Redirect to={routes.ERROR_PAGE}/>)

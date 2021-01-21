@@ -9,7 +9,16 @@ import reggiePangilinan from '../../assets/testimonialImages/reggiePangilinan.jp
 import dennyFilta from '../../assets/testimonialImages/dennyFilta.jpg'
 import celineVillafuerte from '../../assets/testimonialImages/celineVillafuerte.jpg'
 import philBert from '../../assets/testimonialImages/philBert.jpg'
-
+import rodelioQuillosa from '../../assets/testimonialImages/rodelQuillosa.jpg'
+import danArcega from '../../assets/testimonialImages/danArcega.jpg'
+import alfredDanganan from '../../assets/testimonialImages/alfredDanganan.jpg'
+import joannaQuitlong from '../../assets/testimonialImages/joannaQuitlong.jpg'
+import lailaAniscal from '../../assets/testimonialImages/lailaAniscal.jpg'
+import chelouCadelina from '../../assets/testimonialImages/chelouCadelina.jpg'
+import jourishAbasolo from '../../assets/testimonialImages/jourishAbasolo.jpg'
+import johnYonardPauly from '../../assets/testimonialImages/johnYonardPauly.jpg'
+import joshBurgos from '../../assets/testimonialImages/joshBurgos.jpg'
+import carloCaranguian from '../../assets/testimonialImages/carloCaranguian.jpg'
 
 
 export const testimonials = [
@@ -106,5 +115,84 @@ export const testimonials = [
     RC will always be open to learn new set of skills and ready to share them anytime to the world.`,
     picture:philBert
   },
+  {
+    name:`Rodelio Quillosa Jr.`,
+    position:'Lead Software Engineer',
+    company:'Samsung Research and Development',
+    testimonials:`I haven't worked with RC under the same project when he was still in SRPH. But I've known him for being hardworking, passionate, influential, and charismatic. People would feel comfortable and would get positive vibes from him.`,
+    picture:rodelioQuillosa
+  },
+  {
+    name:`Dan Patric Arcega`,
+    position:'Lead Software Engineer',
+    company:'Samsung Research and Development',
+    testimonials:`Very organize person and friendly. he is also a good mentor and
+    driven and motivated in his work. Despite the difficult deadlines for the Project implementation i know ralph 
+    can maintain a positive attitude. and respond to problems without getting angry or frustrated. Be consistent BRO!`,
+    picture:danArcega
+  },
+  {
+    name:`Alfredo Danganan Jr.`,
+    position:'Head of Group - Portal Solutions Group',
+    company:'Samsung Research and Development',
+    testimonials:`Ralph, or RC as we call him, is one of the brightest and most talented web developer in SRPH. He is instrumental in numerous Projects and Initiatives, involving various JS frameworks such as Vue, Angular, and React. He has also done several seminars on frontend and design technologies, and keeps on getting better himself. His work ethic is second to none, and is always the joker amongst any group he is in. He is truly a gem in whatever company lucky enough to hire him. Highly recommended. 💯`,
+    picture:alfredDanganan
+  },
+  {
+    name:`Joanna Marie Quitlong`,
+    position:'Fullstack Developer',
+    company:'Inchcape',
 
+    testimonials:`I worked directly with RC for few months. I immediately recognized him as the person to ask when I had clarification on development. He is a natural leader and his ability to mentor someone is exceptional. 
+    RC's ability to plan and strategize as well as making sure that everything is in balance made my stay in company healthier.     
+    To have him as a collegue is a great pleasure to me. Thanks!`,
+    picture:joannaQuitlong
+  },
+  {
+    name:`Laila Aniscal`,
+    position:'Assistant Manager',
+    company:'Samsung Research and Development',
+    testimonials:`RC is so passionate when it comes to work. 
+    I may have not worked personally with him, but you will see how he truly loves what he is doing when he talks about it. 
+    As an officemate, madali syang kasama, and he knows how to handle different people professionally, he has a chill vibe kapag nakasama mo sya.`,
+    picture:lailaAniscal
+  },
+  {
+    name:`Chelou Cadeliña`,
+    position:'Web Developer',
+    company:'GoCrayons Digital Inc.',
+    testimonials:`Sir Ralph is one of a kind mentor. He's been a great educator, mentor and a friend to us. He's not afraid to go beyond and travel for hours just to teach us. He really loves what he's doing and very passionate about teaching young minds.`,
+    picture:chelouCadelina
+  },
+  {
+    name:`jourish Abasolo`,
+    position:'Web Developer',
+    company:'ING Group',
+    testimonials:`RC is the mentor I never thought I would have. He taught me not only the fundamentals of front end development, but also the IT industry's tricks of the trade. If given the chance look work with him again, I would definitely join the team.`,
+    picture:jourishAbasolo
+  },
+  {
+    name:`John Yonard Pauly`,
+    position:'Web Developer',
+    company:'Avicall Consultancy Services, Inc.',
+    testimonials:`I met Sir Ralph (as one of the speakers) in a seminar meeting in Mandaluyong. In all of the speakers' introduction and statement, he was the only one who caught my attention. His words are less but direct to the point and meaningful. It changed my development's perspective quite well. Please don't stop to give advices and help our fellow developers in our community 🙂`,
+    picture:johnYonardPauly
+  },
+  {
+    name:`Joshua Burgos`,
+    position:'Backend Developer',
+    company:'Maquarie Corp.',
+    testimonials:`- Good mentor - napansin ko kay driggs to na nabuhayan yun ng dugo mag code gawa ng mentoring mo.
+    - Team player - lahat ng naging kateam mo dati, komportable sila sayo
+    - Approachable teammate - willing ka turuan yung mga workmate na bago especially pag sa field mo.
+    - Fun Team mate - pag non work related, madalas G ka. Plus yun pag dating sa team chemistry 🙂`,
+    picture:joshBurgos
+  },
+  {
+    name:`Carlo Caranguian`,
+    position:'Backend Developer',
+    company:'Samsung Research and Development',
+    testimonials:`RC is a very good mentor and a very good friend. He has a very deep understanding about the current trends and technologies used in the industry. He is very patient in teaching inexperienced people. It's very easy to approach him. He is very easy to work with and he brings out a very positive vibe to any team he is on. He is a great leader, he knows how to utilize the skills of the people around him and most of all, he shows his leadership through his work ethic. Also, when he enjoys the project he is working on, you know that it will turn out great since he has all the skills and knowledge to be able to execute.`,
+    picture:carloCaranguian
+  },
 ]

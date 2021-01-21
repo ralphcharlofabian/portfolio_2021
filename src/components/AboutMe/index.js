@@ -98,7 +98,7 @@ import itworks from '../../assets/companyLogoEtc/itworks.png'
 import contactMe from '../../assets/contactMe.png'
 import unQuote from '../../assets/unQuote.svg'
 import quote from '../../assets/quote.svg'
-
+import sketchBucket from '../../assets/sketchBucket.svg'
 import {testimonials} from '../../common/constants/testimonials'
 const AboutMe = () => {
 
@@ -430,9 +430,9 @@ const AboutMe = () => {
             
           </Col>
           <Col span={12} style={{padding:20, }}>
-            <Card size='small' style={{height:  window.outerHeight - 150, borderRadius:30}}>
+            <Card size='small' style={{height:  window.outerHeight - 185, borderRadius:30}}>
               <Row>
-                <h1 style={{color: '#080822',fontFamily:'cursive', textAlign:'center', paddingTop:20 }}>Some comments and testimonials</h1>
+                <h1 style={{color: '#080822',fontFamily:'cursive', textAlign:'center', paddingTop:50 }}>Some comments and testimonials</h1>
               </Row>
               <Carousel autoplay vertical={true}>
                 {testimonials.map(x => 
@@ -467,36 +467,11 @@ const AboutMe = () => {
                 
               
               </Carousel>
+                <img alt='wave' src={sketchBucket} style={{position:'absolute', bottom:-70, right:-170, width:'65%', height:'60%', opacity:0.2, paddingLeft:20}}></img>
             </Card>
+            <h4 style={{color:'gray',fontFamily:'sans-serif', position:'absolute' ,right:10}}>RalphCharloFabian_v1.01</h4>
           </Col>
         </Row>
-          {/* <div>
-
-              <Carousel autoplay >
-                {test.map(x => 
-                <div>
-                  <Row style={{width:'30%', padding:15}}>
-                    <Row style={{width:'100%'}} justify='start'>
-                        <Avatar
-                            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                            alt="Han Solo"
-                            style={{marginRight:10, marginLeft:10}}
-                          />
-                        <h5 style={{paddingTop:10, color: 'gray',fontFamily:'sans-serif',}}>Han Solo</h5>
-                      
-                    </Row>
-                      <h5 style={{color:'black', paddingTop:10, paddingLeft:10}}>
-                        {x.name}
-                      </h5>
-                  </Row>
-                </div>)}
-                
-              
-              </Carousel>
-            </div> */}
-
-
-     
       </div>
         
     </div>

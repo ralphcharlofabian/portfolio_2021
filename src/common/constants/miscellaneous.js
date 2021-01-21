@@ -50,6 +50,8 @@ export const userList = [
     beRating:1,
     designRating:3,
     prodMgtRating:5,
+    happinessRating:3,
+    attendanceStatus:'present',
   },
   {
     id: uuid(),
@@ -73,6 +75,8 @@ export const userList = [
     beRating:1,
     designRating:5,
     prodMgtRating:2,
+    happinessRating:4,
+    attendanceStatus:'leave',
   },
   {
     id: uuid(),
@@ -96,6 +100,8 @@ export const userList = [
     beRating:7,
     designRating:1.5,
     prodMgtRating:3,
+    happinessRating:4,
+    attendanceStatus:'present',
   },
   {
     id: uuid(),
@@ -119,6 +125,8 @@ export const userList = [
     beRating:8.5,
     designRating:9,
     prodMgtRating:6,
+    happinessRating:5,
+    attendanceStatus:'present',
   },
   {
     id: uuid(),
@@ -142,6 +150,8 @@ export const userList = [
     beRating:4,
     designRating:2,
     prodMgtRating:2,
+    happinessRating:4,
+    attendanceStatus:'half-day',
   },
   {
     id: uuid(),
@@ -165,6 +175,8 @@ export const userList = [
     beRating:6.5,
     designRating:1,
     prodMgtRating:4,
+    happinessRating:2,
+    attendanceStatus:'present',
   },
   {
     id: uuid(),
@@ -188,6 +200,8 @@ export const userList = [
     beRating:1.3,
     designRating:1.5,
     prodMgtRating:5,
+    happinessRating:4,
+    attendanceStatus:'half-day',
   },
 ]
 
@@ -214,6 +228,8 @@ export const availableCandidate = [
     beRating:1.5,
     designRating:4,
     prodMgtRating:4,
+    happinessRating:4,
+    attendanceStatus:'present',
     
 
 
@@ -240,6 +256,8 @@ export const availableCandidate = [
     beRating:3.7,
     designRating:2,
     prodMgtRating:4,
+    happinessRating:3,
+    attendanceStatus:'present',
   },
   {
     id: uuid(),
@@ -263,6 +281,8 @@ export const availableCandidate = [
     beRating:3,
     designRating:4,
     prodMgtRating:1,
+    happinessRating:4,
+    attendanceStatus:'present',
   },
   {
     id: uuid(),
@@ -286,6 +306,8 @@ export const availableCandidate = [
     beRating:2,
     designRating:4,
     prodMgtRating:2.5,
+    happinessRating:4,
+    attendanceStatus:'present',
   },
   {
     id: uuid(),
@@ -309,6 +331,8 @@ export const availableCandidate = [
     beRating:5,
     designRating:3,
     prodMgtRating:4.5,
+    happinessRating:3,
+    attendanceStatus:'present',
   },
   {
     id: uuid(),
@@ -332,6 +356,8 @@ export const availableCandidate = [
     beRating:8,
     designRating:3,
     prodMgtRating:3.5,
+    happinessRating:2,
+    attendanceStatus:'present',
   },
   {
     id: uuid(),
@@ -355,6 +381,8 @@ export const availableCandidate = [
     beRating:8,
     designRating:1,
     prodMgtRating:5.5,
+    happinessRating:4,
+    attendanceStatus:'present',
   },
   {
     id: uuid(),
@@ -378,6 +406,8 @@ export const availableCandidate = [
     beRating:1,
     designRating:6.8,
     prodMgtRating:3.5,
+    happinessRating:1,
+    attendanceStatus:'present',
   },
   {
     id: uuid(),
@@ -401,6 +431,8 @@ export const availableCandidate = [
     beRating:2,
     designRating:6,
     prodMgtRating:5,
+    happinessRating:1,
+    attendanceStatus:'present',
   },
   {
     id: uuid(),
@@ -424,6 +456,8 @@ export const availableCandidate = [
     beRating:1.5,
     designRating:3,
     prodMgtRating:4,
+    happinessRating:2,
+    attendanceStatus:'present',
   },
 ]
 

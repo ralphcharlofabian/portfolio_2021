@@ -17,8 +17,8 @@ const ErrorPage = () => {
         title="404"
         subTitle="Sorry, the page you visited does not exist."
         extra={<Button type="primary">
-          <Link to={routes.LOGIN_PAGE}> 
-              Back to Login
+          <Link to={routes.ABOUT_ME}> 
+              Go Back
             </Link> 
           </Button>}
       />

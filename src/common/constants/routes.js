@@ -1,7 +1,9 @@
 export const routes = {
-    LOGIN_PAGE: '/',
+    // LOGIN_PAGE: '/',
+    ABOUT_ME:'/',
     PERSONEL_LIST_PAGE:'/personel_list',
-    ABOUT_ME:'/about_me',
+    // ABOUT_ME:'/about_me',
+    LOGIN_PAGE:'/log_in',
     HIRE_CANDIDATE:'/hire_candidate',
     ERROR_PAGE:'/error_page',
     TASK_LIST:'/task_list',

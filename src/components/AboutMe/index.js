@@ -421,7 +421,7 @@ const AboutMe = () => {
                 </Row>
                   <Row justify='end'>
                 <Link to={routes.LOGIN_PAGE}>
-                    <Button type='text' icon={<RollbackOutlined style={{color:'white', fontSize:30}}/>}> <h4 style={{color: 'white', paddingTop:2}}>Go Back to PTS App</h4></Button>
+                    <Button type='text' icon={<RollbackOutlined style={{color:'white', fontSize:30}}/>}> <h4 style={{color: 'white', paddingTop:2}}>Go to PTS App</h4></Button>
                 </Link>
                   </Row>
                 

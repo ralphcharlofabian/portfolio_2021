@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import {  useSelector, useDispatch } from 'react-redux';
 import firebase from '../../firebase'
 import moment from 'moment';
-import { Layout, Card, Row, Col, Avatar, Rate, Progress, Button, Modal, Input, notification, Divider, Drawer, Tooltip as AntDTooltip, Upload, Dropdown, Menu, DatePicker, InputNumber, } from 'antd';
+import { Layout, Card, Row, Col, Avatar, Rate, Progress, Button, Modal, Input, notification, Divider, Drawer, Tooltip as AntDTooltip, Upload, Dropdown, Menu, DatePicker, InputNumber, Result } from 'antd';
 import {
   UserOutlined,
   DoubleLeftOutlined,
@@ -102,6 +102,7 @@ const PersonelList = () => {
     const [previewVisible, setPreviewVisible] = useState(false);
 
     const [attendanceStatus, setAttendanceStatus] = useState();
+    const [showAttendanceConfirmation, setAttendanceConfirmationModal] = useState(false);
     // useEffect(() => {
     //   setUserList(userList? userList :[])
     //   console.log(userList,'userListInfo useEffect');
@@ -359,21 +360,19 @@ const PersonelList = () => {
       })
     }
 
-    const onClickToggleAttendance = (user) => {
-      // setSelectedUser(user)
-
-      // if (user === 'admin') {
-      //     setAttendanceStatus({
-      //         userName: 'Admin@performanceTrustScale.com',
-      //         password:'@dm1n_pts'
-      //     })
-      // } else {
-      //     setAttendanceStatus({
-      //         userName: 'Employee@performanceTrustScale.com',
-      //         password:'3mpl0y33_pts'
-      //     })
-      // }
+  const onClickToggleAttendance = (selectedPersonelInfo, attendance) => {
+    setAttendanceConfirmationModal(true)
+    selectedPersonelInfo.attendanceStatus = attendance;
   }
+
+  const onClickUpdateAttendance = () => {
+  personelEditSuccess('success');
+  setAttendanceConfirmationModal(false)
+}
+
+const AttendanceConfirmationModal = () => {
+  setAttendanceConfirmationModal(false)
+}
 
     return (
       <>
@@ -515,16 +514,16 @@ const PersonelList = () => {
                     </Col>
                     <Col span={6} style={{paddingLeft:20}}>
                       {personel.attendanceStatus === 'present' ? 
-                        <Button style={{opacity:.70, backgroundColor: 'lightgreen', marginRight:10}} onClick={()=>onClickToggleAttendance('present')}>Present</Button> :
-                        <Button style={{opacity:.20, marginRight:10}} onClick={()=>onClickToggleAttendance('present')}>Present</Button>
+                        <Button style={{opacity:.70, backgroundColor: 'lightgreen', marginRight:10}}>Present</Button> :
+                        <Button style={{opacity:.20, marginRight:10}} onClick={()=>onClickToggleAttendance(personel,'present')}>Present</Button>
                       }
                       {personel.attendanceStatus === 'leave' ? 
-                        <Button style={{opacity:.70, backgroundColor: 'lightblue', marginRight:10}} onClick={()=>onClickToggleAttendance('leave')}>On Leave</Button> :
-                        <Button style={{opacity:.20, marginRight:10}} onClick={()=>onClickToggleAttendance('leave')}>On Leave</Button>
+                        <Button style={{opacity:.70, backgroundColor: 'lightblue', marginRight:10}}>On Leave</Button> :
+                        <Button style={{opacity:.20, marginRight:10}} onClick={()=>onClickToggleAttendance(personel,'leave')}>On Leave</Button>
                       }
                       {personel.attendanceStatus === 'half-day' ? 
-                        <Button style={{opacity:.70, backgroundColor: '#feb8d1', marginRight:10}} onClick={()=>onClickToggleAttendance('half-day')}>Half-Day</Button> :
-                        <Button style={{opacity:.20, marginRight:10}} onClick={()=>onClickToggleAttendance('half-day')}>Half-Day</Button>
+                        <Button style={{opacity:.70, backgroundColor: '#feb8d1', marginRight:10}} >Half-Day</Button> :
+                        <Button style={{opacity:.20, marginRight:10}} onClick={()=>onClickToggleAttendance(personel,'half-day')}>Half-Day</Button>
                       }
                       
                       
@@ -674,7 +673,7 @@ const PersonelList = () => {
 
 
       <Modal
-          title="Create Candidate"
+          title="Candidate Information"
           visible={showInfoModal}
           onCancel={onClickHideCandidateModal}
           closable={true}
@@ -798,6 +797,26 @@ const PersonelList = () => {
              <TextArea rows={2} placeholder="Note" value={tempCandidateInfo.performanceNote} onChange={onchangeItems} name="performanceNote"/>
             </Row>
 
+        </Modal>
+        <Modal
+          title="Attendance Status"
+          visible={showAttendanceConfirmation}
+          onCancel={AttendanceConfirmationModal}
+          closable={true}
+          maskClosable={false}
+          width={600}
+          style={{ top: 30 }}
+          footer={[
+            <Button key="submit" type="primary" onClick={onClickUpdateAttendance}>
+              Done
+            </Button>,
+          ]}
+         >
+           <Result
+            status="success"
+            title="Attendance Successfully Updated"
+            subTitle="Please do check the personels update regarding their attendance and inform HR for some queries if something happen."
+          />
         </Modal>
       </>
       );

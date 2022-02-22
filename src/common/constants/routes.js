@@ -9,5 +9,6 @@ export const routes = {
     TASK_LIST:'/task_list',
     TASK_HISTORY:'/task_history',
     PERFORMANCE_GRAPH:'/performance_graph',
-    ABOUT_THE_APP:'/about_the_app'
+    ABOUT_THE_APP:'/about_the_app',
+    EVALUATION_360:'/evaluation_360',
 }

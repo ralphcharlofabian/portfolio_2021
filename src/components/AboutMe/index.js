@@ -40,10 +40,10 @@ import feDeskImage from '../../assets/feDeskImage.svg'
 import skyImage from '../../assets/sky.jpg'
 
 import personalImage1 from '../../assets/personal1.jpg'
-import personalImage2 from '../../assets/personal2.png'
+import uiuxIcon from '../../assets/uiuxIcon.png'
 import personalImage3 from '../../assets/personal3.jpg'
-import personalImage4 from '../../assets/personal4.jpg'
-import personalImage5 from '../../assets/personal5.jpg'
+import backend from '../../assets/backend.png'
+import frontend from '../../assets/frontend.jpg'
 
 import feImage from '../../assets/techSkillsLogo/frontend.png'
 import reactImage from '../../assets/techSkillsLogo/react.png'
@@ -100,6 +100,10 @@ import unQuote from '../../assets/unQuote.svg'
 import quote from '../../assets/quote.svg'
 import sketchBucket from '../../assets/sketchBucket.svg'
 import {testimonials} from '../../common/constants/testimonials'
+
+import topviewDesk from '../../assets/topviewDesk.jpg'
+
+
 const AboutMe = () => {
 
   useEffect(()=>{
@@ -107,25 +111,6 @@ const AboutMe = () => {
     
   },[]);
 
-
-  const test = [
-    {
-    name:'test1',
-    comment:'2'
-  },
-  {
-    name:'aaaa',
-    comment:'2asasd'
-  },
-  {
-    name:'tesssssst1',
-    comment:'2d213123'
-  },
-  {
-    name:'dddd',
-    comment:'2asdasdas'
-  },
-]
 
   const contentStyle = {
     height: '160px',
@@ -147,7 +132,7 @@ const AboutMe = () => {
           style={{position:'absolute', top: window.innerHeight/3 + 70, left: window.innerWidth/3 - 400, color: 'white', fontSize: 70  }}
           strings={[
             'UI/UX Designer',
-            'Full-stack Developer',
+            'Frontend Engineer',
             'Mentor']}
             typeSpeed={20}
             backSpeed={50}
@@ -179,8 +164,8 @@ const AboutMe = () => {
                     <h1 style={{marginTop:180, fontFamily:'sans-serif', fontWeight: 700, lineHeight: 1.5}}>I Stand on the DOT where design and code intersect, reaching the world through teaching and app/web development</h1>
                     <div style={{paddingTop:50}}>
                       <h2 style={{marginLeft:'15%', width:'70%',fontFamily:'sans-serif', fontWeight: 500, lineHeight: 1.5}}>
-                    {`I am a competent professional with almost 9 years of experience in the field of web/app development, mastering the craft of frontend engineering and experience in backend development. Have extensive knowledge from, UI/UX designing, up to development of application through codes, and applying latest tech in full stack development. 
-                    A well-versed software engineer that has a vision to change the world by means of teaching.`}
+                    {`I am a competent professional with a decade of experience in the field of web/app development, mastering the craft of frontend engineering and experience in backend development. Have extensive knowledge from, UI/UX designing, up to development of application through codes, and applying latest tech in full stack development. 
+                    A well-versed software engineer that has a vision to improve the world by means of teaching.`}
                       </h2>
                     </div>
                   </div>
@@ -201,7 +186,7 @@ const AboutMe = () => {
                 <RubberBand>
                   <Card size='small'>
                     <div style={{textAlign:'center'}}>
-                     <Avatar src={personalImage2} size={150}></Avatar> 
+                     <Avatar src={uiuxIcon} size={150} style={{opacity:.70}}></Avatar> 
                       <h1>UI/UX Designer</h1>
                       <p>I find it astonishing how a simple design can make a big impact to the application and the branding it represent. 
                         How the design as well as the user interaction takes place that makes the app more engaging.  </p>
@@ -226,7 +211,7 @@ const AboutMe = () => {
                 <RubberBand>
                   <Card size='small'>
                     <div style={{textAlign:'center'}}>
-                     <Avatar src={personalImage5} size={150}></Avatar> 
+                     <Avatar src={frontend} size={150} style={{opacity:.70}}></Avatar> 
                       <h1>Frontend Developer</h1>
                       <p>As a frontend developer, I am always amaze how to convert the design from wireframe and UI design to actual website throught code.</p>
                       <Row justify='center'>
@@ -271,7 +256,7 @@ const AboutMe = () => {
                 <RubberBand>
                   <Card size='small'>
                     <div style={{textAlign:'center'}}>
-                     <Avatar src={personalImage4} size={150}></Avatar> 
+                     <Avatar src={backend} size={150} style={{opacity:.70}}></Avatar> 
                       <h1>Backend Developer</h1>
                       <p>Data management, is one of the key factor for the successful syncronization of data from frontend side to backend side and vise versa. </p>
                       <Row justify='center' style={{marginTop:25, marginBottom:25}}>
@@ -310,7 +295,7 @@ const AboutMe = () => {
 
         </Fade>
         <Row justify='center' style={{paddingTop:20}}>
-          <h1 style={{color: '#080822', fontSize: 30,fontFamily:'sans-serif' }}>UI/UX Designer | Full-stack Developer | Mentor</h1>
+          <h1 style={{color: '#080822', fontSize: 30,fontFamily:'sans-serif' }}>UI/UX Designer | Frontend Developer | Mentor</h1>
         </Row>
         <Fade>
           <Row justify='center' style={{paddingTop:10}}>

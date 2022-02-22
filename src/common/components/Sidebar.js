@@ -12,7 +12,8 @@ import {
   ApartmentOutlined,
   LogoutOutlined,
   BugOutlined,
-  LaptopOutlined
+  LaptopOutlined,
+  SmileOutlined
 } from '@ant-design/icons';
 
 //constants
@@ -56,6 +57,11 @@ const Sidebar = ({collapsed}) => {
             <Link to={routes.PERFORMANCE_GRAPH}> 
               Performance Graph
             </Link>
+            </Menu.Item>
+            <Menu.Item key={routes.EVALUATION_360} icon={<SmileOutlined />}>
+            <Link to={routes.EVALUATION_360}> 
+              Evaluation 360
+            </Link>  
             </Menu.Item>
             <Menu.Item key={routes.HIRE_CANDIDATE} icon={<UserAddOutlined />}>
               <Link to={routes.HIRE_CANDIDATE}> 
